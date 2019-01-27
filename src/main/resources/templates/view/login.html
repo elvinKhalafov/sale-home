@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,55 +8,15 @@
     <title>PostHome.com - Login</title>
 
 
-    <!-- Font Awesome !-->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-        crossorigin="anonymous">
-    <!-- Font Source Sans Pro Google !-->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <!-- OWl CSS-->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <!-- OWl CSS-->
-    <link rel="stylesheet" href="css/owl.theme.default.css">
-    <!-- Style CSS !-->
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Bootstrap CSS !-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+    <th:block th:replace="fragment/imports :: imports"/>
 
 </head>
 
 <body>
 
 
-    <header>
-        <nav class="navbar navbar-inverse">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">PostHome.com</a>
-                    <br>
-                    <span class="navbarAfter">sell with us!</span>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">HOME</a>
-                    </li>
-                    <li>
-                        <a href="#">ALL PROPERTIES</a>
-                    </li>
-                    <li>
-                        <a href="#">ABOUT US</a>
-                    </li>
-                    <li>
-                        <a href="#">SUPPORT</a>
-                    </li>
-                    <li>
-                        <button class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#myModal">LOG IN</button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
 
+    <th:block th:replace="fragment/header :: header"/>
 
 
     <div class="registerIntroDiv">
@@ -82,86 +42,14 @@
                         <input type="submit" class="form-control modalSubmit" id="usr" value="Log in">
                     </div>
                     <p class="modalA">or</p>
-                    <a class="modalA" href="#">Register new user</a>
+                    <a class="modalA" th:href="@{/register}">Register new user</a>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="col-md-3 push-left">
-                <ul class="footerUL">
-                    <li class="footerOurC"> OUR CONTACTS</li>
-                    <li class="footerCountry"> Somewhere</li>
-                    <li class="footerAdress">
-                        <i class="footerMapIcon fa fa-map-marker"></i> 27th St New York, NY 10001</li>
-                    <li class="footerNumber">
-                        <i class="footerPhoneIcon fa fa-phone"></i> +1 212-217-7999</li>
-                </ul>
-            </div>
-            <div class="col-md-4 pull-right">
-                <ul class="footerUL">
-                    <li class="footerOurC">OUR NEWSLETTER</li>
-                    <li class="footerInputLi">
-                        <input class="footerInput" type="text" placeholder="Your email">
-                        <button class="footerButton">SUBSCRIBE</button>
-                    </li>
-                </ul>
-                <ul class="footerUl footerUlSocial">
-                    <li>
-                        <a href="#">
-                            <i class="footerSocialIcons fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="footerSocialIcons fa fa-youtube-play " aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="footerSocialIcons fa fa-twitter" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="footerSocialIcons fa fa-instagram" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <h5 class="footerOutro">All rights reserved 2018</h5>
-    </footer>
+
+    <th:block th:replace="fragment/footer :: footer"/>
 
 
-    <!-- Jquerys !-->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <!-- Bootstrap JavaScript !-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-    <!-- OWl JS !-->
-    <script src="js/owl.carousel.js"></script>
-    <script>
-        $('.owl-carousel').owlCarousel({
-            stagePadding: 50,
-            loop: true,
-            margin: 70,
-            nav: true,
-            dots: false,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 3
-                }
-            }
-        });
-        $(".owl-prev").html('<i class="fa fa-chevron-left"></i>');
-        $(".owl-next").html('<i class="fa fa-chevron-right"></i>');
-    </script>
+
 </body>
 
 </html>
