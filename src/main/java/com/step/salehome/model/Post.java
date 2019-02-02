@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+
+@Data
 public class Post {
     private int idPost;
     private int idUser;

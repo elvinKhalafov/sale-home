@@ -3,8 +3,11 @@ package com.step.salehome.model;
 import lombok.Data;
 
 @Data
-public class City {
+public class FavoritePost {
+    private int idFavoritesPost;
     private int idUser;
-    private String name;
+    private int idPost;
+
+
 
 }

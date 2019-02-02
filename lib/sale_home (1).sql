@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2019 at 10:02 AM
+-- Generation Time: Jan 29, 2019 at 05:17 AM
 -- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.11
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sale_home`
+-- Database: `home_sale`
 --
 
 -- --------------------------------------------------------
@@ -72,6 +72,17 @@ CREATE TABLE `post` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `post_image`
+--
+
+CREATE TABLE `post_image` (
+  `id_image_path` int(11) NOT NULL,
+  `image_path` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `role`
 --
 
@@ -102,6 +113,12 @@ CREATE TABLE `user` (
 --
 
 --
+-- Indexes for table `city`
+--
+ALTER TABLE `city`
+  ADD PRIMARY KEY (`id_city`);
+
+--
 -- Indexes for table `favorite_post`
 --
 ALTER TABLE `favorite_post`
@@ -114,17 +131,38 @@ ALTER TABLE `favorite_post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id_post`),
-  ADD KEY `fk_post_user` (`id_user`);
+  ADD KEY `fk_post_user` (`id_user`),
+  ADD KEY `fk_post_image` (`id_image_path`),
+  ADD KEY `fk_post_city` (`id_city`);
+
+--
+-- Indexes for table `post_image`
+--
+ALTER TABLE `post_image`
+  ADD PRIMARY KEY (`id_image_path`);
+
+--
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id_role`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_user`),
+  ADD KEY `fk_user_role` (`id_role`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `city`
+--
+ALTER TABLE `city`
+  MODIFY `id_city` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `favorite_post`
@@ -137,6 +175,18 @@ ALTER TABLE `favorite_post`
 --
 ALTER TABLE `post`
   MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `post_image`
+--
+ALTER TABLE `post_image`
+  MODIFY `id_image_path` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -159,7 +209,15 @@ ALTER TABLE `favorite_post`
 -- Constraints for table `post`
 --
 ALTER TABLE `post`
+  ADD CONSTRAINT `fk_post_city` FOREIGN KEY (`id_city`) REFERENCES `city` (`id_city`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_post_image` FOREIGN KEY (`id_image_path`) REFERENCES `post_image` (`id_image_path`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_post_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `fk_user_role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

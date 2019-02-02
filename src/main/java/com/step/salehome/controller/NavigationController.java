@@ -1,6 +1,8 @@
 package com.step.salehome.controller;
 
+import com.step.salehome.model.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,8 +17,9 @@ public class NavigationController {
     }
 
     @GetMapping("/register")
-    public String openRegisterPage(){
-
+    public String openRegisterPage(Model model){
+        model.addAttribute("user" , new User());
+        model.addAttribute("message", model.asMap().get("message"));
         return "view/register";
     }
 
