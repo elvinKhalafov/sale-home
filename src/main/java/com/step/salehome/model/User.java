@@ -39,6 +39,7 @@ public class User implements UserDetails{
     private String token;
     private Role role;
     private int status;
+    private List<Post> favoritePost;
 
 
     @Override
