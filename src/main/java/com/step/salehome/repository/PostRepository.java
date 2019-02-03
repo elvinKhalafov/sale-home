@@ -9,4 +9,6 @@ public interface PostRepository {
     void addPost(Post post);
 
 
+    void addPost(Post post);
+
 }
