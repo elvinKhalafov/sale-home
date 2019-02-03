@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PostRepository {
 
-
+    boolean insertPost(Post post);
 }

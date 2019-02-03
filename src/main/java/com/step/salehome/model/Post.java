@@ -16,8 +16,10 @@ public class Post {
     private String postType;
     private int roomCount;
     private String homeType;
+    private double price;
     private double area;
     private LocalDateTime shareDate;
+    private String imagePath;
     private String status;
     private boolean emailAllowed;
 

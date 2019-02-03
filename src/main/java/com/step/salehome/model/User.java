@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Data
@@ -33,6 +34,7 @@ public class User {
     private String token;
     private Role role;
     private int status;
+    private List<Post> favoritePost;
 
 
 }
