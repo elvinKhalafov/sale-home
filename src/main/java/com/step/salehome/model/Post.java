@@ -14,9 +14,7 @@ public class Post {
     private int idPost;
     private User user;
 
-    @NotNull
-    @NotBlank(message = "City must not be blank")
-    private String city;
+    private City City;
 
     @NotNull
     @NotBlank(message = "Adress must not be blank")
@@ -34,13 +32,17 @@ public class Post {
     private String desc;
 
     @NotNull
-    @NotBlank(message = "Description must not be blank")
+    @NotBlank(message = "Post type must not be blank")
     @Pattern(regexp = "rent|sale")
     private String postType;
 
     @NotNull
-    @NotBlank(message = "Description must not be blank")
+    @NotBlank(message = "Room count must not be blank")
     private int roomCount;
+
+    @NotNull
+    @NotBlank(message = "Price must not be blank")
+    private double price;
 
     @NotNull
     @NotBlank(message = "Home type must not be blank")
@@ -48,15 +50,13 @@ public class Post {
     private String homeType;
 
     @NotNull
-    @NotBlank(message = "Description must not be blank")
+    @NotBlank(message = "Area must not be blank")
     private double area;
 
 
     private LocalDateTime shareDate;
     private String status;
 
-    @NotNull
-    @NotBlank(message = "Description must not be blank")
     private boolean emailAllowed;
 
 }
