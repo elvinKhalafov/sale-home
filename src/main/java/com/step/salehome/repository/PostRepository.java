@@ -6,6 +6,7 @@ import com.step.salehome.model.User;
 import java.util.List;
 
 public interface PostRepository {
+    void addPost(Post post);
 
 
 }
