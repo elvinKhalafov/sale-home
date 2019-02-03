@@ -1,5 +1,5 @@
 
-<header xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+<header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http:/>/www.thymeleaf.org/thymeleaf-extras-springsecurity4" th:fragment="header">
     <!-- navbar -->
     <nav class="navbar navbar-inverse">
         <div class="container">
@@ -21,8 +21,29 @@
                 <li>
                     <a class="navbarText" href="#">SUPPORT</a>
                 </li>
-                <li>
+                <li sec:authorize="!isAuthenticated()">
                     <button class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#myModal">LOG IN</button>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="loggedNavName">Hi, David</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"> <i class="fa fa-sticky-note"></i> My Posts</a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-star"></i> My Favorites</a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-plus-circle"></i> New Post</a>
+                        </li>
+                        <li>
+                            <a href="#"> <i class="fa fa-cog"></i> Settings</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/logout}"> <i class="fa fa-sign-out"></i> Logout</a>
+                        </li>
+
+                    </ul>
                 </li>
             </ul>
         </div>

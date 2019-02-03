@@ -30,13 +30,14 @@
     </div>
 
     <div class="container registerDiv">
+        <form th:action="@{/login}" class="form newUser" method="post">
         <div class="form-group modalFormGroup">
                         <label for="usr">E-mail:</label>
-                        <input type="text" class="form-control modalInput" id="usr" placeholder="alexander@gmail.com">
+                        <input type="text" class="form-control modalInput" id="usr">
                     </div>
                     <div class="form-group modalFormGroup">
                         <label for="usr">Password:</label>
-                        <input type="password" class="form-control modalInput" id="usr" placeholder="*******">
+                        <input type="password" class="form-control modalInput" id="usr">
                     </div>
                     <div class="form-group modalFormGroup">
                         <input type="submit" class="form-control modalSubmit" id="usr" value="Log in">

@@ -4,7 +4,9 @@ import com.step.salehome.constants.MessageConstants;
 import com.step.salehome.constants.UserConstants;
 import com.step.salehome.model.Role;
 import com.step.salehome.model.User;
+import com.step.salehome.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,12 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @Controller
 public class UserController {
 
+
     @Autowired
     private BCryptPasswordEncoder encoder;
+    @Autowired
+    private UserService userService;
+
 
 
     @PostMapping("/register")
@@ -34,7 +41,10 @@ public class UserController {
         user.setRole(new Role(UserConstants.ROLE_ID_USER));
         user.setStatus(UserConstants.USER_STATUS_INACTIVE);
         user.setToken(UUID.randomUUID().toString());
-        user.setPassword(encoder.encode(user.getPassword));
+        user.setPassword(encoder.encode(user.getPassword()));
+
+        userService.addUser(user);
+
 
 
         return "redirect:/";
