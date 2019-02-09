@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class City {
-    private int id;
+    private int idCity;
     private String city;
 }

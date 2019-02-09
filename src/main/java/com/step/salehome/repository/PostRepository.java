@@ -9,5 +9,6 @@ public interface PostRepository {
 
 
     void addPost(Post post);
+    Post getPostById(int id);
 
 }
