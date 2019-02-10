@@ -5,6 +5,7 @@ import com.step.salehome.constants.UserConstants;
 import com.step.salehome.model.Role;
 import com.step.salehome.model.User;
 import com.step.salehome.service.UserService;
+import com.step.salehome.util.EmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.UUID;
+import java.util.concurrent.Executors;
 
 @Controller
 public class UserController {
@@ -25,6 +27,8 @@ public class UserController {
     private BCryptPasswordEncoder encoder;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailUtil emailUtil;
 
 
 
@@ -42,8 +46,13 @@ public class UserController {
         user.setStatus(UserConstants.USER_STATUS_INACTIVE);
         user.setToken(UUID.randomUUID().toString());
         user.setPassword(encoder.encode(user.getPassword()));
-
         userService.addUser(user);
+
+        Executors
+                .newSingleThreadExecutor()
+                .submit(()-> emailUtil.sendSimpleMessage(user.getEmail(),user.getFirstName(),user.getToken()));
+
+
 
 
 

@@ -7,8 +7,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-
 
 @Data
 public class Post {
@@ -16,7 +16,6 @@ public class Post {
     private User user;
 
     private City City;
-
 
     @NotNull
     @NotBlank(message = "Adress must not be blank")
@@ -56,13 +55,19 @@ public class Post {
     private double area;
 
 
-    private LocalDateTime addingTime;
-    private int status;
+    private LocalDateTime shareDate;
+    private String status;
 
-    private List<String> imagePath;
+    private List<PostImage> postImages;
 
     private boolean emailAllowed;
 
+    public Post() {
+        this.postImages = new ArrayList<>();
+    }
 
+    public void addImage(PostImage postImage){
+        postImages.add(postImage);
+    }
 
 }

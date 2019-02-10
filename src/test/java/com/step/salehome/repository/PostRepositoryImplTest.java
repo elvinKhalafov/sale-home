@@ -1,5 +1,7 @@
 package com.step.salehome.repository;
 
+import com.step.salehome.model.AdvancedSearchPost;
+import com.step.salehome.model.Post;
 import com.step.salehome.model.City;
 import com.step.salehome.model.Post;
 import com.step.salehome.model.User;
@@ -53,4 +55,12 @@ public class PostRepositoryImplTest {
         Post post = postRepository.getPostById(2);
         System.out.println(post);
     }
+    public void searchPost() throws Exception {
+
+        AdvancedSearchPost advancedSearchPost = new AdvancedSearchPost();
+//        advancedSearchPost.setAddress("");
+        List<Post> list = postRepository.searchPost(advancedSearchPost);
+        System.out.println(list);
+    }
+
 }
