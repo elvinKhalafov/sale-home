@@ -17,6 +17,7 @@ public class Post {
 
     private City City;
 
+
     @NotNull
     @NotBlank(message = "Adress must not be blank")
     private String address;
@@ -55,11 +56,13 @@ public class Post {
     private double area;
 
 
-    private LocalDateTime shareDate;
-    private String status;
+    private LocalDateTime addingTime;
+    private int status;
 
     private List<String> imagePath;
 
     private boolean emailAllowed;
+
+
 
 }

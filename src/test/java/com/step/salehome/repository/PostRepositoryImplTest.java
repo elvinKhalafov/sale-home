@@ -36,7 +36,7 @@ public class PostRepositoryImplTest {
         post.setPrice(654.23);
         post.setPostType("rent");
         post.setRoomCount(85);
-        post.setStatus("active");
+        post.setStatus(1);
         User user = new User();
         user.setIdUser(2);
         post.setUser(user);
@@ -50,7 +50,7 @@ public class PostRepositoryImplTest {
 
     @Test
     public void getPostById() {
-        Post post = postRepository.getPostById(1);
+        Post post = postRepository.getPostById(2);
         System.out.println(post);
     }
 }
