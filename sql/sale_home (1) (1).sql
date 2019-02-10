@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2019 at 05:17 AM
+-- Generation Time: Feb 09, 2019 at 08:04 AM
 -- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.10
+-- PHP Version: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `home_sale`
+-- Database: `sale_home`
 --
 
 -- --------------------------------------------------------
@@ -32,6 +32,19 @@ CREATE TABLE `city` (
   `id_city` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `city`
+--
+
+INSERT INTO `city` (`id_city`, `name`) VALUES
+(1, 'Madrid'),
+(2, 'Barcelona'),
+(3, 'Valesiya'),
+(4, 'Roma'),
+(5, 'London'),
+(6, 'Moscow'),
+(7, 'Baku');
 
 -- --------------------------------------------------------
 
@@ -56,18 +69,24 @@ CREATE TABLE `post` (
   `id_user` int(11) NOT NULL,
   `id_city` int(10) NOT NULL,
   `address` varchar(250) NOT NULL,
-  `title` varchar(100) NOT NULL,
+  `keywords` varchar(100) NOT NULL,
   `desc` text NOT NULL,
   `post_type` varchar(10) NOT NULL,
-  `room` int(11) NOT NULL,
+  `room_count` int(11) NOT NULL,
   `home_type` varchar(50) NOT NULL,
   `area` decimal(10,2) NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `id_image_path` int(11) NOT NULL,
   `adding_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` varchar(10) NOT NULL,
-  `email_allowed` int(11) NOT NULL
+  `email_allowed` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`id_post`, `id_user`, `id_city`, `address`, `keywords`, `desc`, `post_type`, `room_count`, `home_type`, `area`, `price`, `adding_time`, `status`, `email_allowed`) VALUES
+(1, 2, 7, 'yasamal ray., yeni yasamal 2, ev 5, m 36', 'sheherin merkezinde yeni tikilmish 80 otaqli menzil', 'menzilin temiri ela, mezeresi denize baxir denizin eviziden 1 deqiqelik mesafededir', 'kiraye', 5, 'menzil', '8548.20', '100.20', '2019-02-02 07:45:14', 'active', 1);
 
 -- --------------------------------------------------------
 
@@ -77,6 +96,7 @@ CREATE TABLE `post` (
 
 CREATE TABLE `post_image` (
   `id_image_path` int(11) NOT NULL,
+  `id_post` int(11) DEFAULT NULL,
   `image_path` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -90,6 +110,14 @@ CREATE TABLE `role` (
   `id_role` int(11) NOT NULL,
   `role_type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id_role`, `role_type`) VALUES
+(1, 'admin'),
+(2, 'moderator');
 
 -- --------------------------------------------------------
 
@@ -107,6 +135,13 @@ CREATE TABLE `user` (
   `id_role` int(11) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT 'inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `email`, `password`, `first_name`, `last_name`, `token`, `id_role`, `status`) VALUES
+(2, 'vuqarnesirov91@gmial.com', '321654', 'Vuqar', 'Nesirov', '654321987', 1, 'active');
 
 --
 -- Indexes for dumped tables
@@ -132,14 +167,14 @@ ALTER TABLE `favorite_post`
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id_post`),
   ADD KEY `fk_post_user` (`id_user`),
-  ADD KEY `fk_post_image` (`id_image_path`),
   ADD KEY `fk_post_city` (`id_city`);
 
 --
 -- Indexes for table `post_image`
 --
 ALTER TABLE `post_image`
-  ADD PRIMARY KEY (`id_image_path`);
+  ADD PRIMARY KEY (`id_image_path`),
+  ADD KEY `fk_image_post` (`id_post`);
 
 --
 -- Indexes for table `role`
@@ -152,6 +187,7 @@ ALTER TABLE `role`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `fk_user_role` (`id_role`);
 
 --
@@ -162,7 +198,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
-  MODIFY `id_city` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_city` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `favorite_post`
@@ -174,7 +210,7 @@ ALTER TABLE `favorite_post`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `post_image`
@@ -186,13 +222,13 @@ ALTER TABLE `post_image`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -210,8 +246,13 @@ ALTER TABLE `favorite_post`
 --
 ALTER TABLE `post`
   ADD CONSTRAINT `fk_post_city` FOREIGN KEY (`id_city`) REFERENCES `city` (`id_city`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_post_image` FOREIGN KEY (`id_image_path`) REFERENCES `post_image` (`id_image_path`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_post_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `post_image`
+--
+ALTER TABLE `post_image`
+  ADD CONSTRAINT `fk_image_post` FOREIGN KEY (`id_post`) REFERENCES `post` (`id_post`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`
