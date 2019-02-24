@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <keywords>PostHome.com - Preview</keywords>
+    <title>PostHome.com - Preview</title>
 
 
-
+    <th:block th:replace="fragment/imports :: imports"/>
 
 
 </head>
@@ -17,113 +17,112 @@
 
 
 
-    <th:block th:replace="fragment/header :: header"/>
+<th:block th:replace="fragment/header :: header"/>
 
 
 
+<div class="preIntroDiv">
+    <div class="container">
+        <h1 class="preIntro">Northwest apartments</h1>
+        <div class="btn preIntroButton">SALE</div>
+        <i class="fa fa-star preStarIcon"></i>
+        <div class="preAdress">
+            <p>$ 420.000</p>
+            <p>$ 750/sq.m</p>
+        </div>
+        <div class="clearFix"></div>
+        <p class="preIntroAdress">
+            <i class="fa fa-map-marker preIntroAdressIcon"></i> Dallas, TX, United States</p>
+    </div>
+</div>
 
-    <div class="preIntroDiv">
-        <div class="container">
-            <h1 class="preIntro">Northwest apartments</h1>
-            <div class="btn preIntroButton">SALE</div>
-            <i class="fa fa-star preStarIcon"></i>
-            <div class="preAdress">
-                <p>$ 420.000</p>
-                <p>$ 750/sq.m</p>
+
+<section class="pre">
+    <div class="container preDiv">
+        <div class="row">
+            <div class="col-md-12">
+                <ul id="imageGallery">
+                    <li data-thumb="images/sample1.jpg" data-src="images/sample1.jpg">
+                        <img src="images/sample1.jpg" />
+                    </li>
+                    <li data-thumb="images/sample2.jpg" data-src="images/sample2.jpg">
+                        <img src="images/sample2.jpg" />
+                    </li>
+                    <li data-thumb="images/sample3.jpg" data-src="images/sample3.jpg">
+                        <img src="images/sample1.jpg" />
+                    </li>
+                    <li data-thumb="images/sample4.jpg" data-src="images/sample4.jpg">
+                        <img src="images/sample4.jpg" />
+                    </li>
+                </ul>
             </div>
-            <div class="clearFix"></div>
-            <p class="preIntroAdress">
-                <i class="fa fa-map-marker preIntroAdressIcon"></i> Dallas, TX, United States</p>
+            <div class="col-md-12">
+                <div class="col-md-7 preLeftDiv">
+                    <div class="preleftBar">
+                        <ul class="preLeftBarUL">
+                            <li class="preLeftLi">
+                                <p>450</p>
+                                <p>sq.m</p>
+                            </li>
+                            <li class="preLeftLi">
+                                <p>4</p>
+                                <p>rooms</p>
+                            </li>
+                            <li class="preLeftLi">
+                                <p>2</p>
+                                <p>bathrooms</p>
+                            </li>
+                            <li class="preLeftLi">
+                                <p>2</p>
+                                <p>bedrooms</p>
+                            </li>
+                            <li class="preLeftLi">
+                                <p>Apartment</p>
+                                <p>type</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <br>
+                    <div class="form-group preTextAreaForm">
+                        <label for="usr">Desription</label>
+                        <textarea type="text" cols="30" rows="10" class="form-control preTextArea" id="usr" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut repudiandae quo itaque porro pariatur rem expedita eligendi optio quam, qui culpa, quod dolore id deserunt? Beatae assumenda consequuntur laboriosam voluptatibus." disabled></textarea>
+                    </div>
+                </div>
+                <div class="col-md-5 preRightDiv">
+                    <div class="container-fluid preRightBar">
+                        <h3 class="preRightIntro">Contact Person</h3>
+                        <br>
+                        <br>
+                        <h5 class="preRightName">David Gilmour</h5>
+                        <h5 class="preRightTel"><i class="fa fa-phone"> 470 123-456</i></h5>
+
+                        <form action="">
+                            <div class="form-group">
+                                <label for="usr">Your-email</label>
+                                <input type="text" class="form-control preTextinputs" id="usr" placeholder="Your Name">
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Your Phone</label>
+                                <input type="number" class="form-control preTextinputs" id="usr" placeholder="Your Phone">
+                                </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="usr">Your message</label>
+                                <textarea type="text" cols="30" rows="10" class="form-control preTextAreaRight" id="usr" placeholder="Your message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="form-control postSubmit">SEND</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-
-    <section class="pre">
-        <div class="container preDiv">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul id="imageGallery">
-                        <li data-thumb="images/sample1.jpg" data-src="images/sample1.jpg">
-                            <img src="images/sample1.jpg" />
-                        </li>
-                        <li data-thumb="images/sample2.jpg" data-src="images/sample2.jpg">
-                            <img src="images/sample2.jpg" />
-                        </li>
-                        <li data-thumb="images/sample3.jpg" data-src="images/sample3.jpg">
-                            <img src="images/sample1.jpg" />
-                        </li>
-                        <li data-thumb="images/sample4.jpg" data-src="images/sample4.jpg">
-                            <img src="images/sample4.jpg" />
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-7 preLeftDiv">
-                        <div class="preleftBar">
-                            <ul class="preLeftBarUL">
-                                <li class="preLeftLi">
-                                    <p>450</p>
-                                    <p>sq.m</p>
-                                </li>
-                                <li class="preLeftLi">
-                                    <p>4</p>
-                                    <p>rooms</p>
-                                </li>
-                                <li class="preLeftLi">
-                                    <p>2</p>
-                                    <p>bathrooms</p>
-                                </li>
-                                <li class="preLeftLi">
-                                    <p>2</p>
-                                    <p>bedrooms</p>
-                                </li>
-                                <li class="preLeftLi">
-                                    <p>Apartment</p>
-                                    <p>type</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <br>
-                        <div class="form-group preTextAreaForm">
-                            <label for="usr">Desription</label>
-                            <textarea type="text" cols="30" rows="10" class="form-control preTextArea" id="usr" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut repudiandae quo itaque porro pariatur rem expedita eligendi optio quam, qui culpa, quod dolore id deserunt? Beatae assumenda consequuntur laboriosam voluptatibus." disabled></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-5 preRightDiv">
-                        <div class="container-fluid preRightBar">
-                            <h3 class="preRightIntro">Contact Person</h3>
-                            <br>
-                            <br>
-                            <h5 class="preRightName">David Gilmour</h5>
-                            <h5 class="preRightTel"><i class="fa fa-phone"> 470 123-456</i></h5>
-
-                            <form action="">
-                                <div class="form-group">
-                                    <label for="usr">Your-email</label>
-                                    <input type="text" class="form-control preTextinputs" id="usr" placeholder="Your Name">
-                                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Your Phone</label>
-                                    <input type="number" class="form-control preTextinputs" id="usr" placeholder="Your Phone">
-                                    </textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="usr">Your message</label>
-                                    <textarea type="text" cols="30" rows="10" class="form-control preTextAreaRight" id="usr" placeholder="Your message"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <button class="form-control postSubmit">SEND</button>
-                                </div>
-                                    
-                            </form>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</section>
 
 
 
@@ -132,61 +131,30 @@
 
 
 
+<th:block th:replace="fragment/footer :: footer"/>
 
 
-    <th:block th:replace="fragment/footer :: footer"/>
 
-
-    <!-- Jquerys !-->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <!-- Bootstrap JavaScript !-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-    <!-- OWl JS !-->
-    <script src="js/owl.carousel.js"></script>
-    <script>
-        $('.owl-carousel').owlCarousel({
-            stagePadding: 50,
+<!-- Fotorama -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#lightSlider").lightSlider();
+        $('#imageGallery').lightSlider({
+            gallery: true,
+            item: 1,
             loop: true,
-            margin: 70,
-            nav: true,
-            dots: false,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 3
-                },
-                1000: {
-                    items: 3
-                }
+            thumbItem: 9,
+            slideMargin: 0,
+            enableDrag: false,
+            currentPagerPosition: 'left',
+            onSliderLoad: function (el) {
+                el.lightGallery({
+                    selector: '#imageGallery .lslide'
+                });
             }
         });
-        $(".owl-prev").html('<i class="fa fa-chevron-left"></i>');
-        $(".owl-next").html('<i class="fa fa-chevron-right"></i>');
-    </script>
-    <!-- Fotorama -->
-    <script src="js/lightslider.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#lightSlider").lightSlider();
-            $('#imageGallery').lightSlider({
-                gallery: true,
-                item: 1,
-                loop: true,
-                thumbItem: 9,
-                slideMargin: 0,
-                enableDrag: false,
-                currentPagerPosition: 'left',
-                onSliderLoad: function (el) {
-                    el.lightGallery({
-                        selector: '#imageGallery .lslide'
-                    });
-                }
-            });
-        });
-    </script>
+    });
+</script>
 </body>
 
 </html>

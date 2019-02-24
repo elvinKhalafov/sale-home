@@ -22,7 +22,7 @@
                     <a class="navbarText" href="#">SUPPORT</a>
                 </li>
                 <li sec:authorize="!isAuthenticated()">
-                    <button class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#myModal">LOG IN</button>
+                    <a th:href="@{/login}" class="btn btn-danger navbar-btn" >LOG IN</a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
                     <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="loggedNavName">Hi, David</a>

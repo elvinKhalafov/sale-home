@@ -2,6 +2,8 @@ package com.step.salehome.controller;
 
 import com.step.salehome.constants.MessageConstants;
 import com.step.salehome.constants.UserConstants;
+import com.step.salehome.exceptions.DuplicateEmailException;
+import com.step.salehome.exceptions.InvalidTokenException;
 import com.step.salehome.model.Role;
 import com.step.salehome.model.User;
 import com.step.salehome.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,7 +36,7 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public String addUser(@Valid @ModelAttribute("user") User user, @RequestParam("password2")String password2, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String addUser(@Valid @ModelAttribute("user") User user, @RequestParam("password2")String password2, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("message", bindingResult.getFieldError().getDefaultMessage());
             return "redirect:/register";
@@ -46,7 +49,12 @@ public class UserController {
         user.setStatus(UserConstants.USER_STATUS_INACTIVE);
         user.setToken(UUID.randomUUID().toString());
         user.setPassword(encoder.encode(user.getPassword()));
-        userService.addUser(user);
+        try {
+            userService.registerUser(user);
+        } catch (DuplicateEmailException e) {
+            redirectAttributes.addFlashAttribute(MessageConstants.ERROR_DUBLICATE_EMAIL);
+            return "redirect:/register";
+        }
 
         Executors
                 .newSingleThreadExecutor()
@@ -57,6 +65,16 @@ public class UserController {
 
 
         return "redirect:/";
+    }
+
+    @RequestMapping("/activate")
+    public String activateUserByToken(@RequestParam("token") String token) throws InvalidTokenException {
+        String newToken = UUID.randomUUID().toString();
+        userService.updateUserStatusByToken(token, newToken);
+
+
+
+        return "redirect:/login";
     }
 
 

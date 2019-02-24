@@ -7,6 +7,9 @@ public class MessageConstants {
     public static final String ERROR_PASSWORD_IS_NOT_MATCH = "Your password is not match";
     public static final String ERROR_INACTIVE_ACCOUNT = "Inactive acoount";
     public static final String INTERNAL_ERROR = "Internal error";
+    public final static String ERROR_MESSAGE_INVALID_TOKEN = "Token is invalid!";
+
+
 
     public static final String SUCCESS_ADD_POST = "Post succesfully added";
     public static final String SUCCESS_REGISTER = "You successfully registered";

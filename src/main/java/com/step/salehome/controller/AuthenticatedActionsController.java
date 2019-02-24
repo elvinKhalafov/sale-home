@@ -16,4 +16,5 @@ public class AuthenticatedActionsController {
         return "redirect/";
 
     }
+
 }
