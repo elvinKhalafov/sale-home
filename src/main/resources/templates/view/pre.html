@@ -9,6 +9,26 @@
 
 
     <th:block th:replace="fragment/imports :: imports"/>
+    <!-- Fotorama -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#lightSlider").lightSlider();
+            $('#imageGallery').lightSlider({
+                gallery: true,
+                item: 1,
+                loop: true,
+                thumbItem: 9,
+                slideMargin: 0,
+                enableDrag: false,
+                currentPagerPosition: 'left',
+                onSliderLoad: function (el) {
+                    el.lightGallery({
+                        selector: '#imageGallery .lslide'
+                    });
+                }
+            });
+        });
+    </script>
 
 
 </head>
@@ -135,26 +155,7 @@
 
 
 
-<!-- Fotorama -->
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#lightSlider").lightSlider();
-        $('#imageGallery').lightSlider({
-            gallery: true,
-            item: 1,
-            loop: true,
-            thumbItem: 9,
-            slideMargin: 0,
-            enableDrag: false,
-            currentPagerPosition: 'left',
-            onSliderLoad: function (el) {
-                el.lightGallery({
-                    selector: '#imageGallery .lslide'
-                });
-            }
-        });
-    });
-</script>
+
 </body>
 
 </html>

@@ -67,12 +67,12 @@ public class UserRepositoryImpl implements UserRepository {
                     user.setIdUser(rs.getInt("id_user"));
                     user.setEmail(rs.getString("email"));
                     user.setPassword(rs.getString("password"));
-                    user.setFirstName(rs.getString(rs.getString("first_name")));
+                    user.setFirstName(rs.getString("first_name"));
                     user.setLastName(rs.getString("last_name"));
                     user.setToken(rs.getString("token"));
                     user.setStatus(rs.getInt("status"));
                     Role role = new Role();
-                    role.setIdRole(rs.getInt("role_id"));
+                    role.setIdRole(rs.getInt("id_role"));
                     role.setRoleType(rs.getString("role_type"));
                     user.setRole(role);
                     return user;
@@ -91,7 +91,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void updateUserStatusByToken(String token, String newToken ) throws InvalidTokenException {
       int status = UserConstants.USER_STATUS_ACTIVE;
-      int okay = jdbcTemplate.update(UPDATE_USER_STATUS_BY_TOKEN, token, status, newToken);
+      int okay = jdbcTemplate.update(UPDATE_USER_STATUS_BY_TOKEN, newToken, status, token);
       if(okay ==0){
           throw new InvalidTokenException(MessageConstants.ERROR_MESSAGE_INVALID_TOKEN);
       }

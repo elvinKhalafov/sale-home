@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <keywords>PostHome.com - Home</keywords>
 
-<th:block th:replace="fragment/imports :: imports"></th:block>
+    <th:block th:replace="fragment/imports :: imports"></th:block>
 
 
 </head>
@@ -15,81 +15,79 @@
 <body>
 
 
-
-        <!-- navbar -->
-        <th:block th:replace="fragment/header :: header"/>
-
+<!-- navbar -->
+<th:block th:replace="fragment/header :: header"/>
 
 
-    <!-- carousel -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-        </ol>
+<!-- carousel -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="images/carousel1-01.jpg">
-                <div class="container">
-                    <button class="btn getButton">GET STARTED</button>
-                </div>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="images/carousel1-01.jpg">
+            <div class="container">
+                <button class="btn getButton">GET STARTED</button>
             </div>
-            <div class="item">
-                <img src="images/carousel2-01.jpg">
-                <div class="container">
-                    <button class="btn getButton">GET STARTED</button>
-                </div>
+        </div>
+        <div class="item">
+            <img src="images/carousel2-01.jpg">
+            <div class="container">
+                <button class="btn getButton">GET STARTED</button>
             </div>
         </div>
     </div>
+</div>
 
 
-    <!-- all content -->
-    <div class="container mainDiv">
-        <h2 class="searchIntro">Welcome to PostHome.com. Currently we have 111 properites for sale and rent.
-                <br> Join us and find your dream house now!</h2>
+<!-- all content -->
+<div class="container mainDiv">
+    <h2 class="searchIntro">Welcome to PostHome.com. Currently we have 111 properites for sale and rent.
+        <br> Join us and find your dream house now!</h2>
 
-        <!-- search bar -->
-        <section class="search">
-            
-                <div class="row MainSearchRow">
-                        <form action="">
-                            <div class="col-xs-3">
-                                <input class="ms-input ms-input-key" type="text" placeholder="Type keywords here">
-                            </div>
-                            <div class="col-xs-3">
-                                <select class="ms-input" name="" id="">
-                                    <option value="">All cities</option>
-                                    <option value="City1">City1</option>
-                                    <option value="City2">City2</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-3">
-                                <select class="ms-input" name="" id="">
-                                    <option value="">All type of sales</option>
-                                    <option value="Type1">Type1</option>
-                                    <option value="Type2">Type2</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-3">
-                                <button class="ms-input ms-button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-        </section>
+    <!-- search bar -->
+    <section class="search">
 
-        <!-- recently added -->
+        <div class="row MainSearchRow">
+            <form action="">
+                <div class="col-xs-3">
+                    <input class="ms-input ms-input-key" type="text" placeholder="Type keywords here">
+                </div>
+                <div class="col-xs-3">
+                    <select class="ms-input" name="" id="">
+                        <option value="">All cities</option>
+                        <option value="City1">City1</option>
+                        <option value="City2">City2</option>
+                    </select>
+                </div>
+                <div class="col-xs-3">
+                    <select class="ms-input" name="" id="">
+                        <option value="">All type of sales</option>
+                        <option value="Type1">Type1</option>
+                        <option value="Type2">Type2</option>
+                    </select>
+                </div>
+                <div class="col-xs-3">
+                    <button class="ms-input ms-button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
 
-        <section class="recently">
-            <div class="row recentlyRow">
-                <h6 class="recentlyRowIntro">Recently added</h6>
-                <div class="owl-carousel owl-theme">
-                    <th:block th:each="post : ${postList}">
+    <!-- recently added -->
+
+    <section class="recently">
+        <div class="row recentlyRow">
+            <h6 class="recentlyRowIntro">Recently added</h6>
+            <div class="owl-carousel owl-theme">
+                <th:block th:each="post : ${postList}">
                     <div class="item">
                         <div class="container-fluid adDiv">
                             <img class="adImg" th:src="@{'/uploads/'+${post.postImages}}" alt="">
@@ -99,7 +97,7 @@
                             <i class="fa fa-star-o star"></i>
                             <p class="price" th:inline="text">
                                 <i class="fa fa-dollar"></i> [[${post.price}]]</p>
-                            <span class="sqmP" th:inline="text" >
+                            <span class="sqmP" th:inline="text">
                                 <i class="fa fa-dollar"> [[${post.price / post.area} + '/sq.m ']]</i>
                             </span>
                             <p class="sqm" th:text="${post.area} + ' sq.m'"></p>
@@ -108,7 +106,8 @@
                             <ul class="adBottom">
                                 <li>
                                     <p class="name" th:inline="text">
-                                        <i class="fa fa-user"></i> [[${post.user.firstName} +' ' + ${post.user.lastName}]]</p>
+                                        <i class="fa fa-user"></i> [[${post.user.firstName} +' ' +
+                                        ${post.user.lastName}]]</p>
                                 </li>
                                 <li>
                                     <p class="date" th:inline="text">
@@ -120,174 +119,129 @@
                             </ul>
                         </div>
                     </div>
-                    </th:block>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Random for sale -->
-        <section class="saleSection">
-            <div class="row recentlyRow">
-                <h6 class="recentlyRowIntro">Random for sale</h6>
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="container-fluid adDiv">
-                            <img class="adImg" src="images/1.jpg" alt="">
-                            <span class="sale">SALE</span>
-                            <p class="city">
-                                <i class="fa fa-map-marker"></i> Chigago</p>
-                            <i class="fa fa-star-o star"></i>
-                            <p class="price">
-                                <i class="fa fa-dollar"></i> 420.000</p>
-                            <span class="sqmP">
-                                <i class="fa fa-dollar"> 750/sq.m</i>
-                            </span>
-                            <p class="sqm"> 540 sq.m</p>
-                            <span class="rooms">3 rooms
-                            </span>
-                            <ul class="adBottom">
-                                <li>
-                                    <p class="name">
-                                        <i class="fa fa-user"></i> Jeff Beck</p>
-                                </li>
-                                <li>
-                                    <p class="date">
-                                        <i class="fa fa-calendar"></i> 1 day ago</p>
-                                </li>
-                                <li>
-                                    <a class="btn moreButton">MORE</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Random for rent -->
-        <section class="rentSection">
-            <div class="row recentlyRow">
-                <h6 class="recentlyRowIntro">Random for rent</h6>
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="container-fluid adDiv">
-                            <img class="adImg" src="images/1.jpg" alt="">
-                            <span class="sale">SALE</span>
-                            <p class="city">
-                                <i class="fa fa-map-marker"></i> Chigago</p>
-                            <i class="fa fa-star-o star"></i>
-                            <p class="price">
-                                <i class="fa fa-dollar"></i> 420.000</p>
-                            <span class="sqmP">
-                                <i class="fa fa-dollar"> 750/sq.m</i>
-                            </span>
-                            <p class="sqm"> 540 sq.m</p>
-                            <span class="rooms"> 3 rooms
-                            </span>
-                            <ul class="adBottom">
-                                <li>
-                                    <p class="name">
-                                        <i class="fa fa-user"></i> Jeff Beck</p>
-                                </li>
-                                <li>
-                                    <p class="date">
-                                        <i class="fa fa-calendar"></i> 1 day ago</p>
-                                </li>
-                                <li>
-                                    <a class="btn moreButton">MORE</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- footer -->
-    <footer>
-        <div class="container">
-            <div class="col-md-3 push-left">
-                <ul class="footerUL">
-                    <li class="footerOurC"> OUR CONTACTS</li>
-                    <li class="footerCountry"> USA</li>
-                    <li class="footerAdress">
-                        <i class="footerMapIcon fa fa-map-marker"></i> 27th St New York, NY 10001</li>
-                    <li class="footerNumber">
-                        <i class="footerPhoneIcon fa fa-phone"></i> +1 212-212-2121</li>
-                </ul>
-            </div>
-            <div class="col-md-4 pull-right">
-                <ul class="footerUL">
-                    <li class="footerOurC">OUR NEWSLETTER</li>
-                    <li class="footerInputLi">
-                        <input class="footerInput" type="text" placeholder="Your email">
-                        <button class="footerButton">SUBSCRIBE</button>
-                    </li>
-                </ul>
-                <ul class="footerUl footerUlSocial">
-                    <li>
-                        <a href="#">
-                            <i class="footerSocialIcons fa fa-facebook" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="footerSocialIcons fa fa-youtube-play " aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="footerSocialIcons fa fa-twitter" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="footerSocialIcons fa fa-instagram" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                </ul>
+                </th:block>
             </div>
         </div>
-        <h5 class="footerOutro">All rights reserved 2018</h5>
-    </footer>
+    </section>
 
 
-    <!-- Jquerys !-->
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <!-- Bootstrap JavaScript !-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    <!-- Random for sale -->
+    <section class="saleSection">
+        <div class="row recentlyRow">
+            <h6 class="recentlyRowIntro">Random for sale</h6>
+            <div class="owl-carousel owl-theme">
+                <div class="item">
+                    <div class="container-fluid adDiv">
+                        <img class="adImg" src="images/1.jpg" alt="">
+                        <span class="sale">SALE</span>
+                        <p class="city">
+                            <i class="fa fa-map-marker"></i> Chigago</p>
+                        <i class="fa fa-star-o star"></i>
+                        <p class="price">
+                            <i class="fa fa-dollar"></i> 420.000</p>
+                        <span class="sqmP">
+                                <i class="fa fa-dollar"> 750/sq.m</i>
+                            </span>
+                        <p class="sqm"> 540 sq.m</p>
+                        <span class="rooms">3 rooms
+                            </span>
+                        <ul class="adBottom">
+                            <li>
+                                <p class="name">
+                                    <i class="fa fa-user"></i> Jeff Beck</p>
+                            </li>
+                            <li>
+                                <p class="date">
+                                    <i class="fa fa-calendar"></i> 1 day ago</p>
+                            </li>
+                            <li>
+                                <a class="btn moreButton">MORE</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Random for rent -->
+    <section class="rentSection">
+        <div class="row recentlyRow">
+            <h6 class="recentlyRowIntro">Random for rent</h6>
+            <div class="owl-carousel owl-theme">
+                <div class="item">
+                    <div class="container-fluid adDiv">
+                        <img class="adImg" src="images/1.jpg" alt="">
+                        <span class="sale">SALE</span>
+                        <p class="city">
+                            <i class="fa fa-map-marker"></i> Chigago</p>
+                        <i class="fa fa-star-o star"></i>
+                        <p class="price">
+                            <i class="fa fa-dollar"></i> 420.000</p>
+                        <span class="sqmP">
+                                <i class="fa fa-dollar"> 750/sq.m</i>
+                            </span>
+                        <p class="sqm"> 540 sq.m</p>
+                        <span class="rooms"> 3 rooms
+                            </span>
+                        <ul class="adBottom">
+                            <li>
+                                <p class="name">
+                                    <i class="fa fa-user"></i> Jeff Beck</p>
+                            </li>
+                            <li>
+                                <p class="date">
+                                    <i class="fa fa-calendar"></i> 1 day ago</p>
+                            </li>
+                            <li>
+                                <a class="btn moreButton">MORE</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<th:block th:replace="fragment/footer :: footer"/>
+
+<!-- Jquerys !-->
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-    <!-- OWl JS !-->
-    <script src="js/owl.carousel.js"></script>
-    <script>
-        $('.owl-carousel').owlCarousel({
-            stagePadding: 50,
-            loop: true,
-            margin: 70,
-            nav: true,
-            dots: false,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 2
-                },
-                1000: {
-                    items: 2
-                },
-                1200: {
-                    items: 3
-                }
+<!-- Bootstrap JavaScript !-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<!-- OWl JS !-->
+<script src="js/owl.carousel.js"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        stagePadding: 50,
+        loop: true,
+        margin: 70,
+        nav: true,
+        dots: false,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 2
+            },
+            1200: {
+                items: 3
             }
-        });
-        $(".owl-prev").html('<i class="fa fa-chevron-left"></i>');
-        $(".owl-next").html('<i class="fa fa-chevron-right"></i>');
-    </script>
+        }
+    });
+    $(".owl-prev").html('<i class="fa fa-chevron-left"></i>');
+    $(".owl-next").html('<i class="fa fa-chevron-right"></i>');
+</script>
 </body>
 
 </html>

@@ -154,7 +154,7 @@ public class PostRepositoryImpl implements PostRepository {
                 post.setHomeType(rs.getString("home_type"));
                 post.setArea(rs.getDouble("area"));
                 post.setPrice(rs.getDouble("price"));
-                post.setShareDate(LocalDateTime.parse(rs.getString("adding_time")));
+                post.setShareDate(rs.getTimestamp("adding_time").toLocalDateTime());
                 post.setStatus(rs.getString("status"));
                 post.setEmailAllowed(Boolean.parseBoolean(rs.getString("email_allowed")));
 
@@ -184,44 +184,48 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public List<Post> getRecentlyPost() {
-        List<Post>postList = jdbcTemplate.query(GET_ALL_POST_SQL, new Object[]{PostConstants.POST_STATUS_ACTIVE},new RowMapper<Post>(){
+        List<Post> postList = null;
 
-            @Nullable
-            @Override
-            public Post mapRow(ResultSet rs, int i) throws SQLException {
-                Post post = new Post();
-                post.setIdPost(rs.getInt("id_post"));
-                post.setAddress(rs.getString("address"));
-                post.setTitle(rs.getString("title"));
-                post.setDesc(rs.getString("desc"));
-                post.setPostType(rs.getString("post_type"));
-                post.setRoomCount(rs.getInt("room_count"));
-                post.setHomeType(rs.getString("home_type"));
-                post.setArea(rs.getDouble("area"));
-                post.setPrice(rs.getDouble("price"));
-                post.setShareDate(rs.getTimestamp("adding_time").toLocalDateTime());
-                post.setStatus(rs.getString("status"));
-                post.setEmailAllowed(Boolean.parseBoolean(rs.getString("email_allowed")));
 
-                User user = new User();
-                user.setIdUser(rs.getInt("id_user"));
-                user.setFirstName(rs.getString("first_name"));
-                user.setLastName(rs.getString("last_name"));
-                post.setUser(user);
+            postList = jdbcTemplate.query(GET_ALL_POST_SQL, new Object[]{PostConstants.POST_STATUS_ACTIVE},new RowMapper<Post>(){
 
-                PostImage postImage = new PostImage();
-                postImage.setIdPostImage(rs.getInt("id_image_path"));
-                postImage.setImagePath(rs.getString("image_path"));
-                post.addImage(postImage);
+               @Nullable
+               @Override
+               public Post mapRow(ResultSet rs, int i) throws SQLException {
+                   Post post = new Post();
+                   post.setIdPost(rs.getInt("id_post"));
+                   post.setAddress(rs.getString("address"));
+                   post.setTitle(rs.getString("title"));
+                   post.setDesc(rs.getString("desc"));
+                   post.setPostType(rs.getString("post_type"));
+                   post.setRoomCount(rs.getInt("room_count"));
+                   post.setHomeType(rs.getString("home_type"));
+                   post.setArea(rs.getDouble("area"));
+                   post.setPrice(rs.getDouble("price"));
+                   post.setShareDate(rs.getTimestamp("adding_time").toLocalDateTime());
+                   post.setStatus(rs.getString("status"));
+                   post.setEmailAllowed(rs.getBoolean("email_allowed"));
 
-                City city = new City();
-                city.setIdCity(rs.getInt("id_city"));
-                city.setCityName(rs.getString("city_name"));
-                post.setCity(city);
-                System.out.println("post = " + post);
-                return post;
-            }
-        });
+                   User user = new User();
+                   user.setIdUser(rs.getInt("id_user"));
+                   user.setFirstName(rs.getString("first_name"));
+                   user.setLastName(rs.getString("last_name"));
+                   post.setUser(user);
+
+                   PostImage postImage = new PostImage();
+                   postImage.setIdPostImage(rs.getInt("id_image_path"));
+                   postImage.setImagePath(rs.getString("image_path"));
+                   post.addImage(postImage);
+
+                   City city = new City();
+                   city.setIdCity(rs.getInt("id_city"));
+                   city.setCityName(rs.getString("city_name"));
+                   post.setCity(city);
+                   System.out.println("post = " + post);
+                   return post;
+               }
+           });
+
 
 
         return postList;

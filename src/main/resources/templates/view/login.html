@@ -29,21 +29,25 @@
         </div>
     </div>
 
+
+
     <div class="container registerDiv">
         <form th:action="@{/login}" class="form newUser" method="post">
         <div class="form-group modalFormGroup">
                         <label for="usr">E-mail:</label>
-                        <input type="text" class="form-control modalInput" id="usr">
+                        <input type="text" class="form-control modalInput" name="email" id="usr">
                     </div>
                     <div class="form-group modalFormGroup">
                         <label for="usr">Password:</label>
-                        <input type="password" class="form-control modalInput" id="usr">
+                        <input type="password" class="form-control modalInput" name="password" id="usr">
                     </div>
                     <div class="form-group modalFormGroup">
+                        <span th:if="${SPRING_SECURITY_LAST_EXCEPTION != null}" th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>
                         <input type="submit" class="form-control modalSubmit" id="usr" value="Log in">
                     </div>
                     <p class="modalA">or</p>
                     <a class="modalA" th:href="@{/register}">Register new user</a>
+        </form>
     </div>
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2019 at 08:04 AM
+-- Generation Time: Feb 24, 2019 at 10:03 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `city` (
   `id_city` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
+  `city_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `city`
 --
 
-INSERT INTO `city` (`id_city`, `name`) VALUES
+INSERT INTO `city` (`id_city`, `city_name`) VALUES
 (1, 'Madrid'),
 (2, 'Barcelona'),
 (3, 'Valesiya'),
@@ -86,7 +86,8 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id_post`, `id_user`, `id_city`, `address`, `title`, `desc`, `post_type`, `room_count`, `home_type`, `area`, `price`, `adding_time`, `status`, `email_allowed`) VALUES
-(1, 2, 7, 'yasamal ray., yeni yasamal 2, ev 5, m 36', 'sheherin merkezinde yeni tikilmish 80 otaqli menzil', 'menzilin temiri ela, mezeresi denize baxir denizin eviziden 1 deqiqelik mesafededir', 'kiraye', 5, 'menzil', '8548.20', '100.20', '2019-02-02 07:45:14', 'active', 1);
+(2, 9, 7, '20yanvar kucesi', 'kohne tikili', 'rahat', 'satiliq', 3, 'menzil', '5548.20', '100.20', '2019-02-07 03:45:14', 'active', 1),
+(3, 9, 5, 'Yasamal rayonu, vasif eliyev kuc', 'london sheherinin yasamal rayonunda 5 mertebeli ev satilir ', 'temir ela veziyyetdedir', 'Satish', 15, 'yasahayish sahesi', '500.00', '1500000.00', '2019-02-24 08:40:57', 'active', 1);
 
 -- --------------------------------------------------------
 
@@ -99,6 +100,14 @@ CREATE TABLE `post_image` (
   `id_post` int(11) DEFAULT NULL,
   `image_path` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `post_image`
+--
+
+INSERT INTO `post_image` (`id_image_path`, `id_post`, `image_path`) VALUES
+(1, 2, 'image'),
+(2, 2, 'image1');
 
 -- --------------------------------------------------------
 
@@ -133,7 +142,7 @@ CREATE TABLE `user` (
   `last_name` varchar(50) NOT NULL,
   `token` varchar(100) NOT NULL,
   `id_role` int(11) NOT NULL,
-  `status` varchar(10) NOT NULL DEFAULT 'inactive'
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -141,7 +150,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `email`, `password`, `first_name`, `last_name`, `token`, `id_role`, `status`) VALUES
-(2, 'vuqarnesirov91@gmial.com', '321654', 'Vuqar', 'Nesirov', '654321987', 1, 'active');
+(9, 'v.nesirov91@gmail.com', '$2a$10$qJI3B2k3iiu5KpMd3d1VseEupeUgeObsTBQvPh0mrGLwL6.5txKeG', 'vuqar', 'nesirov', '365d294c-afbc-4396-a1af-0cd0ac9d14d5', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -210,13 +219,13 @@ ALTER TABLE `favorite_post`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `post_image`
 --
 ALTER TABLE `post_image`
-  MODIFY `id_image_path` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_image_path` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -228,7 +237,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
