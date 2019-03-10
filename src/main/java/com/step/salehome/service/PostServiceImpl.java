@@ -1,6 +1,7 @@
 package com.step.salehome.service;
 
 import com.step.salehome.model.AdvancedSearchPost;
+import com.step.salehome.model.City;
 import com.step.salehome.model.Post;
 import com.step.salehome.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,15 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getmyPosts(int id) {
         return postRepository.getmyPosts(id);
+    }
+
+    @Override
+    public List<City> getAllCity() {
+        return postRepository.getAllCity();
+    }
+
+    @Override
+    public void deletePost(int id) {
+        postRepository.deletePost(id);
     }
 }

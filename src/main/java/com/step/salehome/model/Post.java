@@ -16,7 +16,7 @@ public class Post {
     private int idPost;
     private User user;
 
-    private City City;
+    private City city;
 
     @NotNull
     @NotBlank(message = "Adress must not be blank")
@@ -55,6 +55,8 @@ public class Post {
     @NotNull
     @NotBlank(message = "Area must not be blank")
     private double area;
+
+    private String phoneNumber;
 
 
     private LocalDateTime shareDate;

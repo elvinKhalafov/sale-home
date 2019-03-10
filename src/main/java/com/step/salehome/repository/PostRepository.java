@@ -1,6 +1,7 @@
 package com.step.salehome.repository;
 
 import com.step.salehome.model.AdvancedSearchPost;
+import com.step.salehome.model.City;
 import com.step.salehome.model.Post;
 import com.step.salehome.model.User;
 
@@ -15,4 +16,6 @@ public interface PostRepository {
     List<Post> getmyPosts(int id);
 
 
+    List<City> getAllCity();
+    void deletePost(int id);
 }
