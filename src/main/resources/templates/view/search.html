@@ -86,26 +86,28 @@
         <section class="MainResult">
             <div class="row mainResultRow">
                 <div class="col-md-4 adDivSearchCol">
+                    <th:block th:each="post:${searchPostList}">
                     <div class="container-fluid adDiv adDivSearch">
-                        <img class="adImg" src="images/1.jpg" alt="">
-                        <span class="sale">SALE</span>
-                        <p class="city">
-                            <i class="fa fa-map-marker"></i> Chigago</p>
+                        <img class="adImg" th:src="@{'/uploads/' + ${post.postImages}}" alt="">
+                        <span class="sale" th:text="post.postType">SALE</span>
+                        <p class="city" th:inline="text">
+                            <i class="fa fa-map-marker"></i> [[${post.city.cityName}]]</p>
                         <i class="fa fa-star-o star"></i>
-                        <p class="price">
-                            <i class="fa fa-dollar"></i> 420.000</p>
-                        <span class="sqmP">
-                            <i class="fa fa-dollar"> 750/sq.m</i>
+                        <p class="price" th:inline="text">
+                            <i class="fa fa-dollar"></i> [[${post.price}]]</p>
+                        <span class="sqmP" th:inline="text">
+                            <i class="fa fa-dollar"> [[${post.price / post.area} + '/sq.m ']]</i>
                         </span>
-                        <p class="sqm">
-                            <i class="fa fa-dollar"></i> 540 sq.m</p>
-                        <span class="rooms">
-                            <i class="fa fa-dollar"> 3 rooms</i>
+                        <p class="sqm" th:inline="text">
+                            <i class="fa fa-dollar"></i> [[${post.area}]]</p>
+                        <span class="rooms" th:inline="text">
+                            <i class="fa fa-dollar"> [[${post.roomCount} + 'rooms']]</i>
                         </span>
                         <ul class="adBottom">
                             <li>
-                                <p class="name">
-                                    <i class="fa fa-user"></i> Jeff Beck</p>
+                                <p class="name" th:inline="text">
+                                    <i class="fa fa-user"></i> [[${post.user.firstName} +' ' +
+                                    ${post.user.lastName]]</p>
                             </li>
                             <li>
                                 <p class="date">
@@ -116,6 +118,7 @@
                             </li>
                         </ul>
                     </div>
+                    </th:block>
                 </div>
 
 

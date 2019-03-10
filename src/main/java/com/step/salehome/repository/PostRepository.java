@@ -12,6 +12,7 @@ public interface PostRepository {
     void addPost(Post post);
     Post getPostById(int id);
     List<Post> getRecentlyPost();
+    List<Post> getmyPosts(int id);
 
 
 }

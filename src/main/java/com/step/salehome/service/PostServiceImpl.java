@@ -39,4 +39,9 @@ public class PostServiceImpl implements PostService {
     public Post getPostById(int id) {
         return postRepository.getPostById(id);
     }
+
+    @Override
+    public List<Post> getmyPosts(int id) {
+        return postRepository.getmyPosts(id);
+    }
 }

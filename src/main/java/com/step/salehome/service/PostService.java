@@ -10,5 +10,6 @@ public interface PostService {
     List<Post> getRecentlyPost();
     void addPost(Post post);
     Post getPostById(int id);
+    List<Post> getmyPosts(int id);
 
 }

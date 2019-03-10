@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -53,7 +53,7 @@
                         <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="loggedNavName">Hi, David</a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#"> <i class="fa fa-sticky-note"></i> My Posts</a>
+                                <a th:href="@{/user/myPost}"> <i class="fa fa-sticky-note"></i> My Posts</a>
                             </li>
                             <li>
                                 <a href="#"> <i class="fa fa-star"></i> My Favorites</a>

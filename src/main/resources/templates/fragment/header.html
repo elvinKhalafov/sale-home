@@ -25,19 +25,16 @@
                     <a th:href="@{/login}" class="btn btn-danger navbar-btn" >LOG IN</a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="loggedNavName">Hi, David</a>
+                    <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="loggedNavName"> </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"> <i class="fa fa-sticky-note"></i> My Posts</a>
+                            <a href="@{/myPosts}"> <i class="fa fa-sticky-note"></i> My Posts</a>
                         </li>
                         <li>
                             <a href="#"> <i class="fa fa-star"></i> My Favorites</a>
                         </li>
                         <li>
-                            <a href="#"> <i class="fa fa-plus-circle"></i> New Post</a>
-                        </li>
-                        <li>
-                            <a href="#"> <i class="fa fa-cog"></i> Settings</a>
+                            <a href="@{/post}"> <i class="fa fa-plus-circle"></i> New Post</a>
                         </li>
                         <li>
                             <a th:href="@{/logout}"> <i class="fa fa-sign-out"></i> Logout</a>

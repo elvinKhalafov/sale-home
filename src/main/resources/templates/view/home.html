@@ -111,10 +111,10 @@
                                 </li>
                                 <li>
                                     <p class="date" th:inline="text">
-                                        <i class="fa fa-calendar"></i> [[${post.shareDate}]]</p>
+                                        <i class="fa fa-calendar"></i> [[${post.postAge()}]]</p>
                                 </li>
                                 <li>
-                                    <a class="btn moreButton">MORE</a>
+                                    <a th:href="@{'/post/' + post.idPost}" class="btn moreButton">MORE</a>
                                 </li>
                             </ul>
                         </div>
@@ -133,7 +133,7 @@
                 <div class="item">
                     <div class="container-fluid adDiv">
                         <img class="adImg" src="images/1.jpg" alt="">
-                        <span class="sale">SALE</span>
+                        <span class="sale" >SALE</span>
                         <p class="city">
                             <i class="fa fa-map-marker"></i> Chigago</p>
                         <i class="fa fa-star-o star"></i>
@@ -208,15 +208,15 @@
 
 <th:block th:replace="fragment/footer :: footer"/>
 
-<!-- Jquerys !-->
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>
-<!-- Bootstrap JavaScript !-->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-        crossorigin="anonymous"></script>
-<!-- OWl JS !-->
-<script src="js/owl.carousel.js"></script>
+<!--&lt;!&ndash; Jquerys !&ndash;&gt;-->
+<!--<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="-->
+        <!--crossorigin="anonymous"></script>-->
+<!--&lt;!&ndash; Bootstrap JavaScript !&ndash;&gt;-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"-->
+        <!--integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"-->
+        <!--crossorigin="anonymous"></script>-->
+<!--&lt;!&ndash; OWl JS !&ndash;&gt;-->
+<!--<script th:src="@{/js/owl.carousel.js}"></script>-->
 <script>
     $('.owl-carousel').owlCarousel({
         stagePadding: 50,

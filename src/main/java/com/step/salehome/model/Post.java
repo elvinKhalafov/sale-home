@@ -1,5 +1,6 @@
 package com.step.salehome.model;
 
+import com.step.salehome.util.PostUtil;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -46,6 +47,7 @@ public class Post {
     private double price;
 
     @NotNull
+
     @NotBlank(message = "Home type must not be blank")
     @Pattern(regexp = "apartment|flat|studio")
     private String homeType;
@@ -68,6 +70,10 @@ public class Post {
 
     public void addImage(PostImage postImage){
         postImages.add(postImage);
+    }
+
+    public String postAge(){
+        return PostUtil.ageOf(shareDate);
     }
 
 }
