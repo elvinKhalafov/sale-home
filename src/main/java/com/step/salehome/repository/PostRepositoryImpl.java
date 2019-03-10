@@ -17,17 +17,13 @@ import java.util.List;
 @Repository
 public class PostRepositoryImpl implements PostRepository {
 
-    private final String GET_POST_BY_ID = "select * from post p inner join user u on p.id_user=u.id_user where p.id_post=?";
-
     private final String ADVANCED_SEARCH_POST_SQL = "select * from post p inner join city c on p.id_city = c.id_city inner join user u on p.id_user = u.id_user inner join (select * from post_image where id_image_path in  (select min(id_image_path) from post_image pti group by pti.id_post)) pi on p.id_post = pi.id_post  where p.status = ? ";
-
     private final String GET_ALL_POST_SQL = "select * from post p inner join city c on p.id_city = c.id_city inner join user u on p.id_user = u.id_user inner join (select * from post_image where id_image_path in  (select min(id_image_path) from post_image pti group by pti.id_post)) pi on p.id_post = pi.id_post where p.status = ? order by p.adding_time desc limit 7";
-
     private final String ADD_POST = "insert into post (id_user, id_city, address, title, `desc`, post_type, room_count, home_type, area, price, status, email_allowed) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String ADD_IMAGE = "insert into post_image (id_post, image_path) values (?, ?)";
     private final String SELECT_POST_BY_ID = "select * from post p left join post_image pi on p.id_post=pi.id_post inner join user u on p.id_user=u.id_user inner join city c on c.id_city=p.id_city where p.id_post = ?";
-
-
+    private final String GET_ALL_CITY = "select * from city";
+    private final String DELETE_POST_BY_ID = "delete from post where id_post = ?";
 
 
 
@@ -229,6 +225,16 @@ public class PostRepositoryImpl implements PostRepository {
 
 
         return postList;
+    }
+
+    @Override
+    public List<City> getAllCity() {
+        return jdbcTemplate.query(GET_ALL_CITY, new BeanPropertyRowMapper<>(City.class));
+    }
+
+    @Override
+    public void deletePost(int id) {
+        jdbcTemplate.update(DELETE_POST_BY_ID, id);
     }
 
     @Override

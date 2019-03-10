@@ -60,9 +60,10 @@ public class NavigationController {
     }
 
     @RequestMapping("/add-post")
-    public String openAddPostPage() {
-
-        return "/view/post";
+    public String openAddPostPage(Model model) {
+        model.addAttribute("post", new Post());
+        model.addAttribute("cities", postService.getAllCity());
+        return "view/post";
     }
 
     @RequestMapping("/login")

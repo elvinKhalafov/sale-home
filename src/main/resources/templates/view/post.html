@@ -24,38 +24,38 @@
         <div class="container">
             <h1 class="postIntro">Post your house</h1>
             <span class="postAdress">
-                <p>home ></p>
-                <p>sell</p>
+                <p>home > sell</p>
+
             </span>
         </div>
     </div>
 
+    <form th:action="@{/addpost}" th:object="${post}" method="post" enctype="multipart/form-data">
     <div class="container postDiv">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group postFormGroup">
-                    <label for="usr">Title</label>
-                    <input type="text" class="form-control postInput" id="usr" placeholder="Northwest apartments">
+                    <label for="post-title">Title</label>
+                    <input type="text" class="form-control postInput" name="title"  th:filed="*{title}" id="post-title" placeholder="Northwest apartments">
                 </div>
                 <div class="form-group postFormGroup">
-                    <label for="usr">Location</label>
-                    <select class="form-control postInput" id="usr">
-                        <option value="" selected disabled>Please select</option>
-                        <option value="City1">City1</option>
-                        <option value="City2">City2</option>
+                    <label for="post-city">City</label>
+                    <select class="form-control postInput"  name="idCity" id="post-city">
+                        <option  selected disabled>Please select</option>
+                        <option th:each="city : ${cities}" th:value="${city.idCity}" th:text="${city.cityName}" >City name</option>
                     </select>
                 </div>
                 <div class="form-group postFormGroup">
-                    <label for="usr">Post type</label>
-                    <select class="form-control postInput" id="usr">
+                    <label for="post-type">Post type</label>
+                    <select class="form-control postInput" name="postType" th:filed="*{postType}" id="post-type">
                         <option value="" selected disabled>Please select</option>
                         <option value="Sale">Sale</option>
                         <option value="Rent">Rent</option>
                     </select>
                 </div>
                 <div class="form-group postFormGroup">
-                    <label for="usr">Property type</label>
-                    <select class="form-control postInput" id="usr">
+                    <label for="post-property-type">Property type</label>
+                    <select class="form-control postInput" name="homeType" th:filed="*{homeType}" id="post-property-type">
                         <option value="" selected disabled>Please select</option>
                         <option value="Flat">Flat</option>
                         <option value="Apartment">Apartment</option>
@@ -63,21 +63,21 @@
                     </select>
                 </div>
                 <div class="form-group postFormGroup">
-                    <label for="usr">Price (monthly)</label>
+                    <label for="post-price">Price (monthly)</label>
                     <button class="btn postButtonPrice">$</button>
-                    <input type="number" class="form-control postInput postInputPrice" id="usr" placeholder="300.000">
+                    <input type="number" class="form-control postInput postInputPrice" id="post-price" name="price" th:filed="*{price}" placeholder="300.000">
                 </div>
                 <div class="form-group postFormGroup">
-                    <label for="usr">Photos (up to 6)</label>
+                    <label for="post-photos">Photos (up to 6)</label>
                     <div class="input-group input-file ">
-                        <input type="file" multiple id="select" class="form-control myChooseFile valid" accept="image/x-png,image/gif,image/jpeg">
+                        <input type="file" multiple id="post-photos" class="form-control myChooseFile valid" accept="image/x-png,image/gif,image/jpeg">
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group postFormGroup">
-                    <label for="usr">Rooms</label>
-                    <select class="form-control postInput" id="usr">
+                    <label for="post-rooms">Rooms</label>
+                    <select class="form-control postInput" name="roomCount" th:filed="*{roomCount}" id="post-rooms">
                         <option value="" selected disabled>Please select</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -87,12 +87,12 @@
                     </select>
                 </div>
                 <div class="form-group postFormGroup">
-                    <label for="usr">Area (sq.m)</label>
-                    <input type="number" class="form-control postInput" id="usr" placeholder="540">
+                    <label for="post-area">Area (sq.m)</label>
+                    <input type="text" class="form-control postInput" id="post-area" name="area" th:filed="*{area}" placeholder="540">
                 </div>
                 <div class="form-group postFormGroup">
-                    <label for="usr">Desription (300)</label>
-                    <textarea type="text" cols="30" rows="10" class="form-control postTextArea postInput" id="usr" placeholder="Lorem ipsum dolor sit amet"></textarea>
+                    <label for="desc">Description (300)</label>
+                    <textarea type="text" cols="30" rows="10" class="form-control postTextArea postInput" id="desc" name="desc" th:filed="*{desc}" placeholder="Lorem ipsum dolor sit amet"></textarea>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
             <div class="col-md-6">
                 <div class="form-group postFormGroup postCheckDiv">
                     <label class="postCheck">
-                        <input id="checkPost" type="checkbox" class="postCheckInput" checked="checked">
+                        <input id="checkPost" type="checkbox" name="emailAllowed" class="postCheckInput" checked="checked">
                         <span class="checkmark"></span>
                     </label>
                    <label for="checkPost" class="postCheckLabel">Allow to contact me via e-mail</label>
@@ -109,8 +109,8 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group postFormGroup">
-                    <label for="usr">Phone number</label>
-                    <input type="text" class="form-control postInput" id="usr" placeholder="212-217-7999">
+                    <label for="user-phonenumber">Phone number</label>
+                    <input type="text" class="form-control postInput" name="phoneNumber" th:filed="*{phoneNumber}" id="user-phonenumber" placeholder="212-217-7999">
                 </div>
                 <div class="form-group postFormGroup">
                         <button type="submit" class="form-control postSubmit" id="usr">POST</button>
@@ -119,7 +119,7 @@
             
         </div>
     </div>
-
+    </form>
 
 
 
