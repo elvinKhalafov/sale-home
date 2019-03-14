@@ -30,13 +30,19 @@
         </div>
     </div>
 
-    <form th:action="@{/addpost}" th:object="${post}" method="post" enctype="multipart/form-data">
+
+    <div th:if="${postValidationExceptionList != null}">
+        <div th:each="postValidationException : ${postValidationExceptionList}" th:text="${postValidationException.defaultMessage}"></div>
+    </div>
+
+
+    <form th:action="@{/user/add-post}" th:object="${post}" method="post" enctype="multipart/form-data">
     <div class="container postDiv">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group postFormGroup">
                     <label for="post-title">Title</label>
-                    <input type="text" class="form-control postInput" name="title"  th:filed="*{title}" id="post-title" placeholder="Northwest apartments">
+                    <input th:value="${invalidPost != null && invalidPost.title != null} ? ${invalidPost.title} : '' " type="text" class="form-control postInput" name="title"  th:filed="*{title}" id="post-title" placeholder="Northwest apartments">
                 </div>
                 <div class="form-group postFormGroup">
                     <label for="post-city">City</label>
@@ -49,28 +55,28 @@
                     <label for="post-type">Post type</label>
                     <select class="form-control postInput" name="postType" th:filed="*{postType}" id="post-type">
                         <option value="" selected disabled>Please select</option>
-                        <option value="Sale">Sale</option>
-                        <option value="Rent">Rent</option>
+                        <option value="sale">Sale</option>
+                        <option value="rent">Rent</option>
                     </select>
                 </div>
                 <div class="form-group postFormGroup">
                     <label for="post-property-type">Property type</label>
                     <select class="form-control postInput" name="homeType" th:filed="*{homeType}" id="post-property-type">
                         <option value="" selected disabled>Please select</option>
-                        <option value="Flat">Flat</option>
-                        <option value="Apartment">Apartment</option>
-                        <option value="Studio">Studio</option>
+                        <option value="flat">Flat</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="studio">Studio</option>
                     </select>
                 </div>
-                <div class="form-group postFormGroup">
+                <div  class="form-group postFormGroup">
                     <label for="post-price">Price (monthly)</label>
                     <button class="btn postButtonPrice">$</button>
-                    <input type="number" class="form-control postInput postInputPrice" id="post-price" name="price" th:filed="*{price}" placeholder="300.000">
+                    <input th:value="${invalidPost != null && invalidPost.price != null} ? ${invalidPost.price} : '' " type="number" class="form-control postInput postInputPrice" id="post-price" name="price" th:filed="*{price}" placeholder="300.000">
                 </div>
                 <div class="form-group postFormGroup">
                     <label for="post-photos">Photos (up to 6)</label>
                     <div class="input-group input-file ">
-                        <input type="file" multiple id="post-photos" class="form-control myChooseFile valid" accept="image/x-png,image/gif,image/jpeg">
+                        <input type="file" multiple id="post-photos" name="post_photo" class="form-control myChooseFile valid" accept="image/x-png,image/gif,image/jpeg">
                     </div>
                 </div>
             </div>
@@ -88,11 +94,11 @@
                 </div>
                 <div class="form-group postFormGroup">
                     <label for="post-area">Area (sq.m)</label>
-                    <input type="text" class="form-control postInput" id="post-area" name="area" th:filed="*{area}" placeholder="540">
+                    <input th:value="${invalidPost != null && invalidPost.area != null} ? ${invalidPost.area} : '' " type="text" class="form-control postInput" id="post-area" name="area" th:filed="*{area}" placeholder="540">
                 </div>
                 <div class="form-group postFormGroup">
-                    <label for="desc">Description (300)</label>
-                    <textarea type="text" cols="30" rows="10" class="form-control postTextArea postInput" id="desc" name="desc" th:filed="*{desc}" placeholder="Lorem ipsum dolor sit amet"></textarea>
+                    <label for="desc">Description (100 < <span id="lengthDesc">0</span> < 250)</label>
+                    <textarea th:text="${invalidPost != null && invalidPost.desc != null} ? ${invalidPost.desc} : '' " onkeypress="getLength()" type="text" cols="30" rows="10" class="form-control postTextArea postInput" id="desc" name="desc" th:filed="*{desc}" placeholder="Lorem ipsum dolor sit amet"></textarea>
                 </div>
             </div>
         </div>
@@ -122,7 +128,13 @@
     </form>
 
 
+    <script>
+        function getLength() {
+            var idText = document.getElementById("desc").value;
+            document.getElementById("lengthDesc").innerHTML = idText.length + 1;
 
+        }
+    </script>
 
 
 

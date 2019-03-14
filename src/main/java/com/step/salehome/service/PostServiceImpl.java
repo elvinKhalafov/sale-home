@@ -47,6 +47,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> getFavoritePosts(int id) {
+        return postRepository.getFavoritePosts(id);
+    }
+
+    @Override
     public List<City> getAllCity() {
         return postRepository.getAllCity();
     }

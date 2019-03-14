@@ -25,37 +25,34 @@ public class UserRepositoryImpl implements UserRepository {
     private final String INSERT_NEW_USER_SQL = "insert into user(email, password, first_name, last_name, token, id_role, status) " +
             "values (?, ?, ?, ?, ?, ?, ?)";
 
-    private final String GET_USER_BY_EMAIL = "select * from user u inner join role r on u.id_role = r.id_role where u.email = ?";
+    private final String GET_USER_BY_EMAIL = "select * from user u inner join role r on u.id_role = r.id_role left join favorite_post fp on u.id_user = fp.id_user where u.email = ?";
 
     private final String UPDATE_USER_STATUS_BY_TOKEN = "update user set token = ?, status = ? where token = ?";
 
     private final String GET_EMAIL_COUNT_SQL = "select count(*) as say from user where email=?";
 
 
-
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
 
-  @Override
+    @Override
     public void registerUser(User user) throws DuplicateEmailException {
 //      if (!isEmailValid(user.getEmail())) {
 //          throw new DuplicateEmailException(MessageConstants.ERROR_DUBLICATE_EMAIL);
 //      }
-      try {
-          jdbcTemplate.update(INSERT_NEW_USER_SQL, user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getToken(),user.getRole().getIdRole(), user.getStatus());
-
-      }catch (DuplicateKeyException sql){
-          throw new DuplicateEmailException(MessageConstants.ERROR_DUBLICATE_EMAIL);
-      }
+        try {
+            jdbcTemplate.update(INSERT_NEW_USER_SQL, user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getToken(), user.getRole().getIdRole(), user.getStatus());
+        } catch (DuplicateKeyException sql) {
+            throw new DuplicateEmailException(MessageConstants.ERROR_DUBLICATE_EMAIL);
+        }
 
 
     }
 
     @Override
-    public User loginUser(String email)  {
-      User user = null;
+    public User loginUser(String email) {
+        User user = null;
         try {
 
             user = jdbcTemplate.queryForObject(GET_USER_BY_EMAIL, new Object[]{email}, new RowMapper<User>() {
@@ -75,8 +72,10 @@ public class UserRepositoryImpl implements UserRepository {
                     role.setIdRole(rs.getInt("id_role"));
                     role.setRoleType(rs.getString("role_type"));
                     user.setRole(role);
+                    do {
+                        user.addIdFavoritePost(rs.getLong("id_post"));
+                    } while (rs.next());
                     return user;
-
                 }
             });
         } catch (EmptyResultDataAccessException er) {
@@ -84,32 +83,32 @@ public class UserRepositoryImpl implements UserRepository {
         }
 
 
-    return user;
+        return user;
 
     }
 
     @Override
-    public void updateUserStatusByToken(String token, String newToken ) throws InvalidTokenException {
-      int status = UserConstants.USER_STATUS_ACTIVE;
-      int okay = jdbcTemplate.update(UPDATE_USER_STATUS_BY_TOKEN, newToken, status, token);
-      if(okay ==0){
-          throw new InvalidTokenException(MessageConstants.ERROR_MESSAGE_INVALID_TOKEN);
-      }
+    public void updateUserStatusByToken(String token, String newToken) throws InvalidTokenException {
+        int status = UserConstants.USER_STATUS_ACTIVE;
+        int okay = jdbcTemplate.update(UPDATE_USER_STATUS_BY_TOKEN, newToken, status, token);
+        if (okay == 0) {
+            throw new InvalidTokenException(MessageConstants.ERROR_MESSAGE_INVALID_TOKEN);
+        }
 
 
     }
 
     private boolean isEmailValid(String email) {
-      boolean result = false;
-      int count = jdbcTemplate.queryForObject(GET_EMAIL_COUNT_SQL, new Object[]{email}, Integer.class);
-      if(count == 0){
-          result = true;
-      }
+        boolean result = false;
+        int count = jdbcTemplate.queryForObject(GET_EMAIL_COUNT_SQL, new Object[]{email}, Integer.class);
+        if (count == 0) {
+            result = true;
+        }
 
 
-      return result;
-
-    }
-
+        return result;
 
     }
+
+
+}

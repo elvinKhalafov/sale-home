@@ -15,7 +15,6 @@ import java.util.List;
 
 
 @Data
-@NoArgsConstructor
 public class User implements UserDetails{
 
     private int idUser;
@@ -39,8 +38,16 @@ public class User implements UserDetails{
     private String token;
     private Role role;
     private int status;
-    private List<Post> favoritePost;
+    private List<Long> idFavoritePost;
 
+
+    public User() {
+        idFavoritePost = new ArrayList<>();
+    }
+
+    public void addIdFavoritePost(long idFavoritePost) {
+        this.idFavoritePost.add(idFavoritePost);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

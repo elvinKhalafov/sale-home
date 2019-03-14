@@ -15,6 +15,8 @@ public interface PostRepository {
     List<Post> getRecentlyPost();
     List<Post> getmyPosts(int id);
 
+    List<Post> getFavoritePosts(int id);
+
 
     List<City> getAllCity();
     void deletePost(int id);

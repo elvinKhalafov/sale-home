@@ -19,7 +19,7 @@ public class ResourceController {
     @Value("${file.upload.path}")
     private String imagePath;
 
-    @RequestMapping("/uploads")
+    @RequestMapping("/uploads/{image-path}")
     @ResponseBody
     public byte[] getImageFromFileSystem(@PathVariable("image-path" )String postImage) throws IOException {
 

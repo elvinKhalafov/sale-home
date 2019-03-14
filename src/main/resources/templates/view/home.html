@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <meta charset="UTF-8">
@@ -90,11 +91,14 @@
                 <th:block th:each="post : ${postList}">
                     <div class="item">
                         <div class="container-fluid adDiv">
-                            <img class="adImg" th:src="@{'/uploads/'+${post.postImages}}" alt="">
+                            <img class="adImg" th:src="@{/uploads/}+${post.getPostImages().get(0).getImagePath()}" alt="">
                             <span class="sale">SALE</span>
                             <p class="city" th:inline="text">
                                 <i class="fa fa-map-marker"></i> [[${post.city.cityName}]]</p>
-                            <i class="fa fa-star-o star"></i>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <i  th:if="${#authentication.getPrincipal().getIdFavoritePost().contains(post.getIdPost())}" class="fa fa-star-o star"></i>
+                                <i  th:if="${#authentication.getPrincipal().getIdFavoritePost().contains(post.getIdPost())}" class="fa fa-star star"></i>
+                            </th:block>
                             <p class="price" th:inline="text">
                                 <i class="fa fa-dollar"></i> [[${post.price}]]</p>
                             <span class="sqmP" th:inline="text">
@@ -114,7 +118,7 @@
                                         <i class="fa fa-calendar"></i> [[${post.postAge()}]]</p>
                                 </li>
                                 <li>
-                                    <a th:href="@{'/post/' + post.idPost}" class="btn moreButton">MORE</a>
+                                    <a th:href="@{/post/}+${post.idPost}" class="btn moreButton">MORE</a>
                                 </li>
                             </ul>
                         </div>

@@ -20,7 +20,6 @@ public class HomeController {
     public String index(Model model) {
         List<Post> postList = postService.getRecentlyPost();
         model.addAttribute("postList", postList);
-        System.out.println(postList);
         return "view/home";
     }
 
