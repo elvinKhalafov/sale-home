@@ -16,12 +16,14 @@ import java.nio.file.Paths;
 @Controller
 public class ResourceController {
 
-    @Value("${file.upload.path}")
+    @Value("#{getImagePath}")
     private String imagePath;
 
-    @RequestMapping("/uploads")
+    @RequestMapping("/uploads/{image-path}")
     @ResponseBody
     public byte[] getImageFromFileSystem(@PathVariable("image-path" )String postImage) throws IOException {
+
+        System.out.println("Path: "+imagePath);
 
         postImage = new String(DatatypeConverter.parseBase64Binary(postImage));
         Path img = Paths.get(imagePath, postImage);

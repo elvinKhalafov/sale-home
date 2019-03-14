@@ -18,43 +18,43 @@ public class Post {
 
     private City city;
 
-    @NotNull
-    @NotBlank(message = "Adress must not be blank")
+
+//    @NotNull(message = "Adress must not be null")
+//    @NotBlank(message = "Adress must not be blank")
     private String address;
 
-    @NotNull
+
+    @NotNull(message = "Title must not be null")
     @NotBlank(message = "Title must not be blank")
     @Size(min = 30, max = 150, message = "Title length must be between 30 and 150")
     private String title;
 
 
-    @NotNull
+    @NotNull(message = "Description must not be null")
     @NotBlank(message = "Description must not be blank")
-    @Size(min = 100, max = 150, message = "Title length must be between 100 and 250")
+    @Size(min = 100, max = 250, message = "Description length must be between 100 and 250")
     private String desc;
 
-    @NotNull
+
+    @NotNull(message = "Post must not be null")
     @NotBlank(message = "Post type must not be blank")
     @Pattern(regexp = "rent|sale")
     private String postType;
 
-    @NotNull
-    @NotBlank(message = "Room count must not be blank")
-    private int roomCount;
+    @NotNull(message = "Room count must not be null")
+    private Integer roomCount;
 
-    @NotNull
-    @NotBlank(message = "Price must not be blank")
-    private double price;
+    @NotNull(message = "Price must not be null")
+    private Double price;
 
-    @NotNull
 
+    @NotNull(message = "Home type must not be null")
     @NotBlank(message = "Home type must not be blank")
-    @Pattern(regexp = "apartment|flat|studio")
+    @Pattern(regexp = "apartment|flat|studio", message = "Home type don't match with current select")
     private String homeType;
 
-    @NotNull
-    @NotBlank(message = "Area must not be blank")
-    private double area;
+    @NotNull(message = "Area must not be null")
+    private Double area;
 
     private String phoneNumber;
 

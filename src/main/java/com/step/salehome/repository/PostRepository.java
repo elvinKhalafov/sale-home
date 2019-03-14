@@ -16,6 +16,8 @@ public interface PostRepository {
     List<Post> getRandomPost();
     List<Post> getmyPosts(int id);
 
+    List<Post> getFavoritePosts(int id);
+
 
     List<City> getAllCity();
     void deletePost(int id);

@@ -28,8 +28,8 @@ public class PostRepositoryImpl implements PostRepository {
 
     private final String ADD_POST = "insert into post (id_user, id_city, address, title, `desc`, post_type, room_count, home_type, area, price, status, email_allowed) values ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String ADD_IMAGE = "insert into post_image (id_post, image_path) values (?, ?)";
-    private final String SELECT_POST_BY_USER_ID = "select * from post p inner join city c on p.id_city = c.id_city inner join user u on p.id_user = u.id_user inner join (select * from post_image where id_image_path in  (select min(id_image_path) from post_image pti group by pti.id_post)) pi on p.id_post = pi.id_post  where p.id_user=?";
-
+    private final String SELECT_POST_BY_USER_ID = "select * from post p inner join city c on p.id_city = c.id_city inner join user u on p.id_user = u.id_user inner join (select * from post_image where id_image_path in (select min(id_image_path) from post_image pti group by pti.id_post)) pi on p.id_post = pi.id_post  where p.id_user=?";
+    private final String GET_FAVORITE_POSTS = "select * from favorite_post fp inner join post p using(id_post) inner join city c on p.id_city = c.id_city inner join (select * from post_image where id_image_path in (select min(id_image_path) from post_image pti group by pti.id_post)) pi on p.id_post = pi.id_post where fp.id_user = ?";
 
     private final String SELECT_POST_BY_ID = "select * from post p left join post_image pi on p.id_post=pi.id_post inner join user u on p.id_user=u.id_user inner join city c on c.id_city=p.id_city where p.id_post = ?";
     private final String GET_ALL_CITY = "select * from city";
@@ -328,6 +328,44 @@ public class PostRepositoryImpl implements PostRepository {
         });
 
         return myposts;
+    }
+
+    @Override
+    public List<Post> getFavoritePosts(int id) {
+        List<Post>postList = jdbcTemplate.query(GET_FAVORITE_POSTS, new Object[] {id},new RowMapper<Post>(){
+
+            @Nullable
+            @Override
+            public Post mapRow(ResultSet rs, int i) throws SQLException {
+                Post post = new Post();
+                post.setIdPost(rs.getInt("id_post"));
+                post.setAddress(rs.getString("address"));
+                post.setTitle(rs.getString("title"));
+                post.setDesc(rs.getString("desc"));
+                post.setPostType(rs.getString("post_type"));
+                post.setRoomCount(rs.getInt("room_count"));
+                post.setHomeType(rs.getString("home_type"));
+                post.setArea(rs.getDouble("area"));
+                post.setPrice(rs.getDouble("price"));
+                post.setShareDate(rs.getTimestamp("adding_time").toLocalDateTime());
+                post.setStatus(rs.getString("status"));
+                post.setEmailAllowed(Boolean.parseBoolean(rs.getString("email_allowed")));
+
+                PostImage postImage = new PostImage();
+                postImage.setIdPostImage(rs.getInt("id_image_path"));
+                postImage.setImagePath(rs.getString("image_path"));
+                post.addImage(postImage);
+
+                City city = new City();
+                city.setIdCity(rs.getInt("id_city"));
+                city.setCityName(rs.getString("city_name"));
+                post.setCity(city);
+
+                return post;
+            }
+        });
+
+        return postList;
     }
 
     @Override
