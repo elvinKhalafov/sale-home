@@ -25,7 +25,7 @@
                     <a th:href="@{/login}" class="btn btn-danger navbar-btn" >LOG IN</a>
                 </li>
                 <li sec:authorize="isAuthenticated()">
-                    <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="loggedNavName"> </a>
+                    <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="loggedNavName"><th:block th:text="${#authentication.getPrincipal().getFirstName()}"></th:block> </a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="@{/myPosts}"> <i class="fa fa-sticky-note"></i> My Posts</a>

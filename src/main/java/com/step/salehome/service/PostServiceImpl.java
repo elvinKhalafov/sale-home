@@ -55,4 +55,19 @@ public class PostServiceImpl implements PostService {
     public void deletePost(int id) {
         postRepository.deletePost(id);
     }
+
+    @Override
+    public void addToFavorite(int postId, int userId) {
+        postRepository.addToFavorite(postId, userId);
+    }
+
+    @Override
+    public List<Post> getMyFavoritePosts(int id) {
+        return postRepository.getMyFavoritePosts(id);
+    }
+
+    @Override
+    public List<Post> getRandomPost() {
+        return postRepository.getRandomPost();
+    }
 }

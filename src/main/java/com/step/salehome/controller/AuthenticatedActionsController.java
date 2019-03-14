@@ -5,18 +5,17 @@ import com.step.salehome.model.Post;
 import com.step.salehome.model.User;
 import com.step.salehome.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.step.salehome.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Controller
@@ -35,8 +34,10 @@ public class AuthenticatedActionsController {
     public String myPosts(Model model){
         User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Post> myPosts = postService.getmyPosts(user.getIdUser());
-        System.out.println("Size"+myPosts.size());
         model.addAttribute("myPosts", myPosts);
+
+        List<Post> favoritePosts = postService.getMyFavoritePosts(user.getIdUser());
+        model.addAttribute("favoritePost", favoritePosts);
         return "view/myPosts";
 
 
@@ -48,4 +49,14 @@ public class AuthenticatedActionsController {
         model.addAttribute("message", MessageConstants.SUCCESS_DELETE);
         return "view/myPosts";
     }
+
+    @RequestMapping("/addToFavorite/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void addToFavorite(@PathParam("id") int id) {
+        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        postService.addToFavorite(id, user.getIdUser());
+
+    }
+
+
 }

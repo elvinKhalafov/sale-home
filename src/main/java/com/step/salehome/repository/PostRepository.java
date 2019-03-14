@@ -13,9 +13,14 @@ public interface PostRepository {
     void addPost(Post post);
     Post getPostById(int id);
     List<Post> getRecentlyPost();
+    List<Post> getRandomPost();
     List<Post> getmyPosts(int id);
 
 
     List<City> getAllCity();
     void deletePost(int id);
+
+    void addToFavorite(int postId , int userId);
+    List<Post> getMyFavoritePosts(int id);
+
 }

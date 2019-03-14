@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -90,11 +90,11 @@
                 <th:block th:each="post : ${postList}">
                     <div class="item">
                         <div class="container-fluid adDiv">
-                            <img class="adImg" th:src="@{'/uploads/'+${post.postImages}}" alt="">
+                            <img class="adImg" th:src="@{'/uploads/'+${post.postImages.get(0).getImagePath()}}" alt="">
                             <span class="sale">SALE</span>
                             <p class="city" th:inline="text">
                                 <i class="fa fa-map-marker"></i> [[${post.city.cityName}]]</p>
-                            <i class="fa fa-star-o star"></i>
+                            <i sec:authorize="isAuthenticated()" class="fa fa-star-o star" th:onclick="'addToFavorite('+${post.idPost}+')'"></i>
                             <p class="price" th:inline="text">
                                 <i class="fa fa-dollar"></i> [[${post.price}]]</p>
                             <span class="sqmP" th:inline="text">
@@ -130,36 +130,39 @@
         <div class="row recentlyRow">
             <h6 class="recentlyRowIntro">Random for sale</h6>
             <div class="owl-carousel owl-theme">
-                <div class="item">
-                    <div class="container-fluid adDiv">
-                        <img class="adImg" src="images/1.jpg" alt="">
-                        <span class="sale" >SALE</span>
-                        <p class="city">
-                            <i class="fa fa-map-marker"></i> Chigago</p>
-                        <i class="fa fa-star-o star"></i>
-                        <p class="price">
-                            <i class="fa fa-dollar"></i> 420.000</p>
-                        <span class="sqmP">
-                                <i class="fa fa-dollar"> 750/sq.m</i>
+                <th:block th:each="post : ${randomSalePost}">
+                    <div class="item">
+                        <div class="container-fluid adDiv">
+                            <img class="adImg" th:src="@{'/uploads/'+${post.postImages.get(0).getImagePath()}}" alt="">
+                            <span class="sale">SALE</span>
+                            <p class="city" th:inline="text">
+                                <i class="fa fa-map-marker"></i> [[${post.city.cityName}]]</p>
+                            <i sec:authorize="isAuthenticated()" class="fa fa-star-o star" th:onclick="'addToFavorite('+${post.idPost}+')'"></i>
+                            <p class="price" th:inline="text">
+                                <i class="fa fa-dollar"></i> [[${post.price}]]</p>
+                            <span class="sqmP" th:inline="text">
+                                <i class="fa fa-dollar"> [[${post.price / post.area} + '/sq.m ']]</i>
                             </span>
-                        <p class="sqm"> 540 sq.m</p>
-                        <span class="rooms">3 rooms
+                            <p class="sqm" th:text="${post.area} + ' sq.m'"></p>
+                            <span class="rooms" th:text="${post.roomCount} + ' rooms'">
                             </span>
-                        <ul class="adBottom">
-                            <li>
-                                <p class="name">
-                                    <i class="fa fa-user"></i> Jeff Beck</p>
-                            </li>
-                            <li>
-                                <p class="date">
-                                    <i class="fa fa-calendar"></i> 1 day ago</p>
-                            </li>
-                            <li>
-                                <a class="btn moreButton">MORE</a>
-                            </li>
-                        </ul>
+                            <ul class="adBottom">
+                                <li>
+                                    <p class="name" th:inline="text">
+                                        <i class="fa fa-user"></i> [[${post.user.firstName} +' ' +
+                                        ${post.user.lastName}]]</p>
+                                </li>
+                                <li>
+                                    <p class="date" th:inline="text">
+                                        <i class="fa fa-calendar"></i> [[${post.postAge()}]]</p>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/post/' + post.idPost}" class="btn moreButton">MORE</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                </th:block>
             </div>
         </div>
     </section>
@@ -169,36 +172,39 @@
         <div class="row recentlyRow">
             <h6 class="recentlyRowIntro">Random for rent</h6>
             <div class="owl-carousel owl-theme">
-                <div class="item">
-                    <div class="container-fluid adDiv">
-                        <img class="adImg" src="images/1.jpg" alt="">
-                        <span class="sale">SALE</span>
-                        <p class="city">
-                            <i class="fa fa-map-marker"></i> Chigago</p>
-                        <i class="fa fa-star-o star"></i>
-                        <p class="price">
-                            <i class="fa fa-dollar"></i> 420.000</p>
-                        <span class="sqmP">
-                                <i class="fa fa-dollar"> 750/sq.m</i>
+                <th:block th:each="post : ${randomRentPost}">
+                    <div class="item">
+                        <div class="container-fluid adDiv">
+                            <img class="adImg" th:src="@{'/uploads/'+${post.postImages.get(0).getImagePath()}}" alt="">
+                            <span class="sale">SALE</span>
+                            <p class="city" th:inline="text">
+                                <i class="fa fa-map-marker"></i> [[${post.city.cityName}]]</p>
+                            <i sec:authorize="isAuthenticated()" class="fa fa-star-o star" th:onclick="'addToFavorite('+${post.idPost}+')'"></i>
+                            <p class="price" th:inline="text">
+                                <i class="fa fa-dollar"></i> [[${post.price}]]</p>
+                            <span class="sqmP" th:inline="text">
+                                <i class="fa fa-dollar"> [[${post.price / post.area} + '/sq.m ']]</i>
                             </span>
-                        <p class="sqm"> 540 sq.m</p>
-                        <span class="rooms"> 3 rooms
+                            <p class="sqm" th:text="${post.area} + ' sq.m'"></p>
+                            <span class="rooms" th:text="${post.roomCount} + ' rooms'">
                             </span>
-                        <ul class="adBottom">
-                            <li>
-                                <p class="name">
-                                    <i class="fa fa-user"></i> Jeff Beck</p>
-                            </li>
-                            <li>
-                                <p class="date">
-                                    <i class="fa fa-calendar"></i> 1 day ago</p>
-                            </li>
-                            <li>
-                                <a class="btn moreButton">MORE</a>
-                            </li>
-                        </ul>
+                            <ul class="adBottom">
+                                <li>
+                                    <p class="name" th:inline="text">
+                                        <i class="fa fa-user"></i> [[${post.user.firstName} +' ' +
+                                        ${post.user.lastName}]]</p>
+                                </li>
+                                <li>
+                                    <p class="date" th:inline="text">
+                                        <i class="fa fa-calendar"></i> [[${post.postAge()}]]</p>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/post/' + post.idPost}" class="btn moreButton">MORE</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                </th:block>
 
             </div>
         </div>

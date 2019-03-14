@@ -15,4 +15,10 @@ public interface PostService {
 
     List<City> getAllCity();
     void deletePost(int id);
+
+    void addToFavorite(int postId , int userId);
+
+    List<Post> getMyFavoritePosts(int id);
+
+    List<Post> getRandomPost();
 }
