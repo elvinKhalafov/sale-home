@@ -31,6 +31,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import javax.websocket.server.PathParam;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -72,9 +73,23 @@ public class AuthenticatedActionsController {
     @PostMapping("/add-post")
     public String processSubmit(@Valid @ModelAttribute("post") Post post, BindingResult bindingResult, Model model, @RequestParam("idCity") int idCity, @RequestParam("post_photo") MultipartFile[] files) throws IOException {
 
+        Arrays.asList(files).forEach(file -> System.out.println(file.getContentType()));
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("invalidPost", post);
             model.addAttribute("postValidationExceptionList", bindingResult.getAllErrors());
+            model.addAttribute("cities", postService.getAllCity());
+
+            return "view/post";
+        } else if (files.length < 1 || files.length > 6) {
+            model.addAttribute("invalidePost", post);
+            model.addAttribute("uploadTypeError", files.length < 1 ? MessageConstants.ERROE_FILES_LENGTH_LESS_THAN_ONE : MessageConstants.ERROR_FILES_MORE_THAN_SIX);
+            model.addAttribute("cities", postService.getAllCity());
+
+            return "view/post";
+        } else if (!Arrays.stream(files).noneMatch(multipartFile -> multipartFile.getContentType().endsWith(".jpg") || multipartFile.getOriginalFilename().endsWith(".png") || multipartFile.getOriginalFilename().endsWith(".jpeg"))) {
+            model.addAttribute("invalidePost", post);
+            model.addAttribute("pictureSizeError", MessageConstants.INVALID_FILE_TYPE);
             model.addAttribute("cities", postService.getAllCity());
 
             return "view/post";
@@ -92,8 +107,7 @@ public class AuthenticatedActionsController {
             }
 
 
-
-            for ( MultipartFile multipartFile: files ) {
+            for (MultipartFile multipartFile : files) {
 
                 Path file = Paths.get(pathToSaveFile.toString(), multipartFile.getOriginalFilename());
 
@@ -126,7 +140,7 @@ public class AuthenticatedActionsController {
     @RequestMapping("/addToFavorite/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void addToFavorite(@PathParam("id") int id) {
-        User user= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postService.addToFavorite(id, user.getIdUser());
 
     }

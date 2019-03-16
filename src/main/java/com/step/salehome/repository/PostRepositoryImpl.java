@@ -288,8 +288,8 @@ public class PostRepositoryImpl implements PostRepository {
 
 
     @Override
-    public List<Post> getmyPosts(int id) {
-        List<Post> myposts = jdbcTemplate.query(SELECT_POST_BY_USER_ID, new Object[]{id}, new RowMapper<Post>() {
+    public List<Post> getMyPosts(int id) {
+        List<Post> myPosts = jdbcTemplate.query(SELECT_POST_BY_USER_ID, new Object[]{id}, new RowMapper<Post>() {
             @Nullable
             @Override
             public Post mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -327,7 +327,7 @@ public class PostRepositoryImpl implements PostRepository {
             }
         });
 
-        return myposts;
+        return myPosts;
     }
 
     @Override
@@ -464,7 +464,7 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public Post getPostById(int id) {
-        return jdbcTemplate.query(SELECT_POST_BY_USER_ID, new Object[]{id}, new ResultSetExtractor<Post>() {
+        return jdbcTemplate.query(SELECT_POST_BY_ID, new Object[]{id}, new ResultSetExtractor<Post>() {
             @Override
             public Post extractData(ResultSet resultSet) throws SQLException, DataAccessException {
                 Post post = new Post();
@@ -472,9 +472,10 @@ public class PostRepositoryImpl implements PostRepository {
                     if (post.getIdPost() == 0) {
                         post.setIdPost(resultSet.getInt("id_post"));
                         post.setAddress(resultSet.getString("address"));
+                        post.setTitle(resultSet.getString("title"));
                         post.setArea(resultSet.getDouble("area"));
                         City city = new City();
-                        city.setCityName(resultSet.getString("name"));
+                        city.setCityName(resultSet.getString("city_name"));
                         city.setIdCity(resultSet.getInt("id_city"));
                         post.setCity(city);
                         post.setDesc(resultSet.getString("desc"));

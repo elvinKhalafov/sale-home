@@ -43,16 +43,16 @@
 
 <div class="preIntroDiv">
     <div class="container">
-        <h1 class="preIntro">Northwest apartments</h1>
-        <div class="btn preIntroButton">SALE</div>
+        <h1 class="preIntro" >[[${post.getTitle()}]]</h1>
+        <div class="btn preIntroButton">[[${post.postType}]]</div>
         <i class="fa fa-star preStarIcon"></i>
         <div class="preAdress">
-            <p>$ 420.000</p>
-            <p>$ 750/sq.m</p>
+            <p>$ [[${post.price}]]</p>
+            <p>$ [[${post.price / post.area}]]/sq.m</p>
         </div>
         <div class="clearFix"></div>
         <p class="preIntroAdress">
-            <i class="fa fa-map-marker preIntroAdressIcon"></i> Dallas, TX, United States</p>
+            <i class="fa fa-map-marker preIntroAdressIcon"></i> [[${post.city.cityName}]]</p>
     </div>
 </div>
 
@@ -62,17 +62,8 @@
         <div class="row">
             <div class="col-md-12">
                 <ul id="imageGallery">
-                    <li data-thumb="images/sample1.jpg" data-src="images/sample1.jpg">
-                        <img src="images/sample1.jpg" />
-                    </li>
-                    <li data-thumb="images/sample2.jpg" data-src="images/sample2.jpg">
-                        <img src="images/sample2.jpg" />
-                    </li>
-                    <li data-thumb="images/sample3.jpg" data-src="images/sample3.jpg">
-                        <img src="images/sample1.jpg" />
-                    </li>
-                    <li data-thumb="images/sample4.jpg" data-src="images/sample4.jpg">
-                        <img src="images/sample4.jpg" />
+                    <li th:each="postImage : ${post.postImages}" th:data-thumb="@{'/uploads/'+${postImage.imagePath}}" th:data-src="@{'/uploads/'+${postImage.imagePath}}">
+                        <img th:src="@{'/uploads/'+${postImage.imagePath}}" />
                     </li>
                 </ul>
             </div>
@@ -81,31 +72,23 @@
                     <div class="preleftBar">
                         <ul class="preLeftBarUL">
                             <li class="preLeftLi">
-                                <p>450</p>
+                                <p>[[${post.area}]]</p>
                                 <p>sq.m</p>
                             </li>
                             <li class="preLeftLi">
-                                <p>4</p>
+                                <p>[[${post.roomCount}]]</p>
                                 <p>rooms</p>
                             </li>
                             <li class="preLeftLi">
-                                <p>2</p>
-                                <p>bathrooms</p>
-                            </li>
-                            <li class="preLeftLi">
-                                <p>2</p>
-                                <p>bedrooms</p>
-                            </li>
-                            <li class="preLeftLi">
-                                <p>Apartment</p>
+                                <p>[[${post.homeType}]]</p>
                                 <p>type</p>
                             </li>
                         </ul>
                     </div>
                     <br>
                     <div class="form-group preTextAreaForm">
-                        <label for="usr">Desription</label>
-                        <textarea type="text" cols="30" rows="10" class="form-control preTextArea" id="usr" placeholder="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut repudiandae quo itaque porro pariatur rem expedita eligendi optio quam, qui culpa, quod dolore id deserunt? Beatae assumenda consequuntur laboriosam voluptatibus." disabled></textarea>
+                        <label for="desc">Desription</label>
+                        <textarea type="text" cols="30" rows="10" class="form-control preTextArea" id="desc" th:text="${post.desc}" disabled></textarea>
                     </div>
                 </div>
                 <div class="col-md-5 preRightDiv">
@@ -113,26 +96,26 @@
                         <h3 class="preRightIntro">Contact Person</h3>
                         <br>
                         <br>
-                        <h5 class="preRightName">David Gilmour</h5>
+                        <h5 class="preRightName">[[${post.user.lastName +" "+ post.user.firstName}]]</h5>
                         <h5 class="preRightTel"><i class="fa fa-phone"> 470 123-456</i></h5>
 
-                        <form action="">
+                        <form th:if="${post.emailAllowed}" th:action="@{'/send-email/'+${post.idPost}}" method="post">
                             <div class="form-group">
-                                <label for="usr">Your-email</label>
-                                <input type="text" class="form-control preTextinputs" id="usr" placeholder="Your Name">
+                                <label for="email">Your-email</label>
+                                <input type="text" name="email" class="form-control preTextinputs" id="email" placeholder="Your Name">
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <label for="usr">Your Phone</label>
-                                <input type="number" class="form-control preTextinputs" id="usr" placeholder="Your Phone">
+                                <label for="phone">Your Phone</label>
+                                <input type="text" name="phone" class="form-control preTextinputs" id="phone" placeholder="Your Phone">
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <label for="usr">Your message</label>
-                                <textarea type="text" cols="30" rows="10" class="form-control preTextAreaRight" id="usr" placeholder="Your message"></textarea>
+                                <label for="message">Your message</label>
+                                <textarea type="text" name="message" cols="30" rows="10" class="form-control preTextAreaRight" id="message" placeholder="Your message"></textarea>
                             </div>
                             <div class="form-group">
-                                <button class="form-control postSubmit">SEND</button>
+                                <input type="submit" class="form-control postSubmit" value="SEND">
                             </div>
 
                         </form>

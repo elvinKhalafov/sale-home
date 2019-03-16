@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <meta charset="UTF-8">
@@ -94,7 +94,10 @@
                             <span class="sale">SALE</span>
                             <p class="city" th:inline="text">
                                 <i class="fa fa-map-marker"></i> [[${post.city.cityName}]]</p>
-                            <i sec:authorize="isAuthenticated()" class="fa fa-star-o star" th:onclick="'addToFavorite('+${post.idPost}+')'"></i>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <i th:if="${#authentication.getPrincipal().getIdFavoritePost().contains(post.idPost)}" class="fa fa-star star" th:onclick="'deleteFromFavoritePost('+${post.idPost}+')'"></i>
+                                <i th:if="${!#authentication.getPrincipal().getIdFavoritePost().contains(post.idPost)}" class="fa fa-star star" th:onclick="'deleteFromFavoritePost('+${post.idPost}+')'"></i>
+                            </th:block>
                             <p class="price" th:inline="text">
                                 <i class="fa fa-dollar"></i> [[${post.price}]]</p>
                             <span class="sqmP" th:inline="text">

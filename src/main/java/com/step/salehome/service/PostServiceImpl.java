@@ -43,7 +43,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> getmyPosts(int id) {
-        return postRepository.getmyPosts(id);
+        return postRepository.getMyPosts(id);
     }
 
     @Override

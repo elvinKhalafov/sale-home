@@ -24,6 +24,11 @@ public class PostRepositoryTest {
         System.out.println(cities);
     }
 
+    @Test
+    public void getPostById(){
+        System.out.println(postRepository.getPostById(5));
+    }
+
     public void deletePost() {
         postRepository.deletePost(2);
     }

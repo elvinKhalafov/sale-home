@@ -14,7 +14,7 @@ public interface PostRepository {
     Post getPostById(int id);
     List<Post> getRecentlyPost();
     List<Post> getRandomPost();
-    List<Post> getmyPosts(int id);
+    List<Post> getMyPosts(int id);
 
     List<Post> getFavoritePosts(int id);
 

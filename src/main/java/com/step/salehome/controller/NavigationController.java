@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,8 +22,9 @@ public class NavigationController {
     private PostService postService;
 
     @RequestMapping("/post/{idPost}")
-    public String openPostPage(Model model, @PathParam("idPost") int idPost){
-        Post post =postService.getPostById(idPost);
+    public String openPostPage(Model model, @PathVariable("idPost") int idPost){
+        System.out.println(idPost);
+        Post post = postService.getPostById(idPost);
 
         model.addAttribute("post", post);
 
