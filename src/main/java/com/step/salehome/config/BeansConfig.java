@@ -19,7 +19,7 @@ public class BeansConfig {
 //        } else {
 //            return imagePathMac;
 //        }
-        return System.getProperty("user.home");
+        return System.getProperty("user.home")+"/image";
 
     }
 }

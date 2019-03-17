@@ -32,7 +32,7 @@ public class Post {
 
     @NotNull(message = "Description must not be null")
     @NotBlank(message = "Description must not be blank")
-    @Size(min = 500, max = 250, message = "Description length must be between 100 and 250")
+    @Size(min = 50, max = 250, message = "Description length must be between 100 and 250")
     private String desc;
 
 

@@ -214,6 +214,7 @@ public class PostRepositoryImpl implements PostRepository {
                    post.setShareDate(rs.getTimestamp("adding_time").toLocalDateTime());
                    post.setStatus(rs.getString("status"));
                    post.setEmailAllowed(rs.getBoolean("email_allowed"));
+                   
 
                    User user = new User();
                    user.setIdUser(rs.getInt("id_user"));
