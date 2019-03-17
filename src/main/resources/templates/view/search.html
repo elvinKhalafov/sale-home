@@ -15,121 +15,115 @@
 <body>
 
 
-    <th:block th:replace="fragment/header :: header"/>
+<th:block th:replace="fragment/header :: header"/>
 
 
-
-    <div class="postIntroDiv">
-        <div class="container">
-            <h1 class="postIntro">Advanced search</h1>
-            <span class="postAdress">
+<div class="postIntroDiv">
+    <div class="container">
+        <h1 class="postIntro">Advanced search</h1>
+        <span class="postAdress">
                 <p>home ></p>
                 <p>search</p>
             </span>
+    </div>
+</div>
+
+
+<div class="container mainDiv">
+
+    <section class="Mainsearch">
+        <div class="row MainSearchRow">
+            <form action="">
+                <div class="col-xs-3">
+                    <input class="ms-input ms-input-key" type="text" placeholder="Type keywords here">
+                </div>
+                <div class="col-xs-3">
+                    <select class="ms-input" name="" id="">
+                        <option selected disabled value="a">All cities</option>
+                        <option value="b">b</option>
+                    </select>
+                </div>
+                <div class="col-xs-3">
+                    <select class="ms-input" name="" id="">
+                        <option selected disabled value="a">All type of sales</option>
+                        <option value="b">b</option>
+                    </select>
+                </div>
+                <div class="col-xs-3">
+                    <button class="ms-input ms-button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+                <div class="col-xs-3">
+                    <select class="ms-input" name="" id="">
+                        <option selected disabled value="a">All type of properties</option>
+                        <option value="b">b</option>
+                    </select>
+                </div>
+                <div class="col-xs-3">
+                    <select class="ms-input" name="" id="">
+                        <option selected disabled value="a">Rooms</option>
+                        <option value="b">b</option>
+                    </select>
+                </div>
+                <div class="col-xs-3">
+                    <input class="ms-input" type="number" placeholder="Min. price">
+                </div>
+                <div class="col-xs-3">
+                    <input class="ms-input" type="number" placeholder="Max. price">
+                </div>
+                <div class="col-xs-3">
+                    <input class="ms-input" type="number" placeholder="Min. area">
+                </div>
+                <div class="col-xs-3">
+                    <input class="ms-input" type="number" placeholder="Max. area">
+                </div>
+            </form>
         </div>
-    </div>
+    </section>
 
-
-    <div class="container mainDiv">
-
-<section class="Mainsearch">
-    <div class="row MainSearchRow">
-        <form action="">
-            <div class="col-xs-3">
-                <input class="ms-input ms-input-key" type="text" placeholder="Type keywords here">
-            </div>
-            <div class="col-xs-3">
-                <select class="ms-input" name="" id="">
-                    <option selected disabled value="a">All cities</option>
-                    <option value="b">b</option>
-                </select>
-            </div>
-            <div class="col-xs-3">
-                <select class="ms-input" name="" id="">
-                    <option selected disabled value="a">All type of sales</option>
-                    <option value="b">b</option>
-                </select>
-            </div>
-            <div class="col-xs-3">
-                <button class="ms-input ms-button">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-            <div class="col-xs-3">
-                <select class="ms-input" name="" id="">
-                    <option selected disabled value="a">All type of properties</option>
-                    <option value="b">b</option>
-                </select>
-            </div>
-            <div class="col-xs-3">
-                <select class="ms-input" name="" id="">
-                    <option selected disabled value="a">Rooms</option>
-                    <option value="b">b</option>
-                </select>
-            </div>
-            <div class="col-xs-3">
-                <input class="ms-input" type="number" placeholder="Min. price">
-            </div>
-            <div class="col-xs-3">
-                <input class="ms-input" type="number" placeholder="Max. price">
-            </div>
-            <div class="col-xs-3">
-                <input class="ms-input" type="number" placeholder="Min. area">
-            </div>
-            <div class="col-xs-3">
-                <input class="ms-input" type="number" placeholder="Max. area">
-            </div>
-        </form>
-    </div>
-</section>
-
-        <section class="MainResult">
-            <div class="row mainResultRow">
+    <section class="MainResult">
+        <div class="row mainResultRow">
+            <th:block th:each="post:${searchPostList}">
                 <div class="col-md-4 adDivSearchCol">
-                    <th:block th:each="post:${searchPostList}">
+
                     <div class="container-fluid adDiv adDivSearch">
-                        <img class="adImg" th:src="@{'/uploads/' + ${post.postImages}}" alt="">
-                        <span class="sale" th:text="post.postType">SALE</span>
+                        <img class="adImg" th:src="@{'/uploads/'+${post.postImages.get(0).getImagePath()}}" alt="">
+                        <span class="sale" th:text="${post.postType}">SALE</span>
                         <p class="city" th:inline="text">
                             <i class="fa fa-map-marker"></i> [[${post.city.cityName}]]</p>
                         <i class="fa fa-star-o star"></i>
                         <p class="price" th:inline="text">
                             <i class="fa fa-dollar"></i> [[${post.price}]]</p>
-                        <span class="sqmP" th:inline="text">
-                            <i class="fa fa-dollar"> [[${post.price / post.area} + '/sq.m ']]</i>
-                        </span>
                         <p class="sqm" th:inline="text">
                             <i class="fa fa-dollar"></i> [[${post.area}]]</p>
                         <span class="rooms" th:inline="text">
-                            <i class="fa fa-dollar"> [[${post.roomCount} + 'rooms']]</i>
-                        </span>
+                <i class="fa fa-dollar"> [[${post.roomCount}]] rooms</i>
+                </span>
                         <ul class="adBottom">
                             <li>
                                 <p class="name" th:inline="text">
-                                    <i class="fa fa-user"></i> [[${post.user.firstName} +' ' +
-                                    ${post.user.lastName]]</p>
+                                    <i class="fa fa-user"></i> [[${post.user.firstName}]] [[${post.user.lastName}]]</p>
                             </li>
                             <li>
                                 <p class="date">
-                                    <i class="fa fa-calendar"></i> 1 day ago</p>
+                                    <i class="fa fa-calendar"></i> [[${post.postAge()}]]</p>
                             </li>
                             <li>
-                                <button class="btn moreButton">MORE</button>
+                                <a th:href="@{'/post/' + ${post.idPost}}" class="btn moreButton">MORE</a>
                             </li>
                         </ul>
                     </div>
-                    </th:block>
+
                 </div>
+            </th:block>
+        </div>
+    </section>
 
 
-            </div>
-        </section>
+</div>
 
-
-    </div>
-
-    <th:block th:replace="fragment/footer :: footer"/>
-
+<th:block th:replace="fragment/footer :: footer"/>
 
 
 </body>

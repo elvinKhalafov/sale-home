@@ -59,8 +59,9 @@ public class NavigationController {
         advancedSearchPost.setPostType(postType);
 
         List<Post>searchPostList = postService.searchPost(advancedSearchPost);
-        model.addAttribute("searchPostlist", searchPostList);
-        return "/view/search";
+        System.out.println(searchPostList);
+        model.addAttribute("searchPostList", searchPostList);
+        return "view/search";
     }
 
     @RequestMapping("/add-post")
@@ -73,7 +74,7 @@ public class NavigationController {
     @RequestMapping("/login")
     public String openLoginPage() {
 
-        return "/view/login";
+        return "view/login";
     }
 
 

@@ -21,13 +21,19 @@ public class ResourceController {
 
     @RequestMapping("/uploads/{image-path}")
     @ResponseBody
-    public byte[] getImageFromFileSystem(@PathVariable("image-path" )String postImage) throws IOException {
+    public byte[] getImageFromFileSystem(@PathVariable("image-path" )String postImage) {
 
         System.out.println("Path: "+imagePath);
 
         postImage = new String(DatatypeConverter.parseBase64Binary(postImage));
         Path img = Paths.get(imagePath, postImage);
-        return Files.readAllBytes(img);
+        try {
+            return Files.readAllBytes(img);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
 
     }
 

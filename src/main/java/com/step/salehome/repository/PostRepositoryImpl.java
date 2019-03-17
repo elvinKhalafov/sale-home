@@ -56,13 +56,14 @@ public class PostRepositoryImpl implements PostRepository {
        objects.add(PostConstants.POST_STATUS_ACTIVE);
         if (!advancedSearchPost.isAllFieldsNull()){
 
+            sql.append(" and");
 
 
             if (advancedSearchPost.getIdCity()!=null){
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" idCity = ?");
+                sql.append(" p.id_city = ?");
                 objects.add(advancedSearchPost.getIdCity());
                 condition = true;
             }
@@ -70,7 +71,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append((" and"));
                 }
-                sql.append(" address = ?");
+                sql.append(" p.address = ?");
                 objects.add(advancedSearchPost.getAddress());
                 condition = true;
             }
@@ -78,7 +79,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" keywords=?");
+                sql.append(" p.keywords=?");
                 objects.add(advancedSearchPost.getKeywords());
                 condition = true;
             }
@@ -86,7 +87,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" postType=?");
+                sql.append(" p.post_type=?");
                 objects.add(advancedSearchPost.getPostType());
                 condition = true;
             }
@@ -95,7 +96,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" roomType=?");
+                sql.append(" p.room_count=?");
                 objects.add(advancedSearchPost.getRoomCount());
                 condition = true;
             }
@@ -103,7 +104,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" maxPrice<=?");
+                sql.append(" p.price<=?");
                 objects.add(advancedSearchPost.getMaxPrice());
                 condition = true;
             }
@@ -111,7 +112,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" miniPrices>=?");
+                sql.append(" p.price>=?");
                 objects.add(advancedSearchPost.getMiniPrice());
                 condition = true;
             }
@@ -119,7 +120,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" homeType=?");
+                sql.append(" p.home_type=?");
                 objects.add(advancedSearchPost.getHomeType());
                 condition = true;
             }
@@ -127,7 +128,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" maxArea<=?");
+                sql.append(" p.area<=?");
                 objects.add(advancedSearchPost.getMaxArea());
                 condition = true;
             }
@@ -135,7 +136,7 @@ public class PostRepositoryImpl implements PostRepository {
                 if(condition){
                     sql.append(" and");
                 }
-                sql.append(" miniArea>=?");
+                sql.append(" p.area>=?");
                 objects.add(advancedSearchPost.getMiniArea());
 
             }
@@ -146,10 +147,11 @@ public class PostRepositoryImpl implements PostRepository {
 
 
         }
-        sql.append("order by p.adding_time");
+        sql.append(" order by p.adding_time;");
+        System.out.println(sql.toString());
 
 
-        List<Post>postList = jdbcTemplate.query(ADVANCED_SEARCH_POST_SQL, objects.toArray(),new RowMapper<Post>(){
+        List<Post>postList = jdbcTemplate.query(sql.toString(), objects.toArray(),new RowMapper<Post>(){
 
             @Nullable
             @Override

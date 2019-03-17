@@ -14,11 +14,12 @@ public class BeansConfig {
 
     @Bean
     public String getImagePath() {
-        if (System.getProperty("os.name").toLowerCase().contains("win")) {
-            return imagePathWin;
-        } else {
-            return imagePathMac;
-        }
+//        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+//            return imagePathWin;
+//        } else {
+//            return imagePathMac;
+//        }
+        return System.getProperty("user.home");
 
     }
 }

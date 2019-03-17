@@ -54,26 +54,25 @@
     <section class="search">
 
         <div class="row MainSearchRow">
-            <form action="">
+            <form th:action="@{/search}">
                 <div class="col-xs-3">
-                    <input class="ms-input ms-input-key" type="text" placeholder="Type keywords here">
+                    <input class="ms-input ms-input-key" type="text" placeholder="Type keywords here" name="keywords">
                 </div>
                 <div class="col-xs-3">
-                    <select class="ms-input" name="" id="">
-                        <option value="">All cities</option>
-                        <option value="City1">City1</option>
-                        <option value="City2">City2</option>
+                    <select class="ms-input" name="cityName" id="">
+                        <option  selected disabled>Please select</option>
+                        <option th:each="city : ${cities}" th:value="${city.idCity}" th:text="${city.cityName}" >City name</option>
                     </select>
                 </div>
                 <div class="col-xs-3">
-                    <select class="ms-input" name="" id="">
+                    <select class="ms-input" name="postType" id="">
                         <option value="">All type of sales</option>
-                        <option value="Type1">Type1</option>
-                        <option value="Type2">Type2</option>
+                        <option value="sale">Sale</option>
+                        <option value="rent">Rent</option>
                     </select>
                 </div>
                 <div class="col-xs-3">
-                    <button class="ms-input ms-button">
+                    <button class="ms-input ms-button" type="submit">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
@@ -97,9 +96,6 @@
                             <i sec:authorize="isAuthenticated()" class="fa fa-star-o star" th:onclick="'addToFavorite('+${post.idPost}+')'"></i>
                             <p class="price" th:inline="text">
                                 <i class="fa fa-dollar"></i> [[${post.price}]]</p>
-                            <span class="sqmP" th:inline="text">
-                                <i class="fa fa-dollar"> [[${post.price / post.area} + '/sq.m ']]</i>
-                            </span>
                             <p class="sqm" th:text="${post.area} + ' sq.m'"></p>
                             <span class="rooms" th:text="${post.roomCount} + ' rooms'">
                             </span>
@@ -115,6 +111,7 @@
                                 </li>
                                 <li>
                                     <a th:href="@{'/post/' + ${post.idPost}}" class="btn moreButton">MORE</a>
+
                                 </li>
                             </ul>
                         </div>
@@ -140,17 +137,13 @@
                             <i sec:authorize="isAuthenticated()" class="fa fa-star-o star" th:onclick="'addToFavorite('+${post.idPost}+')'"></i>
                             <p class="price" th:inline="text">
                                 <i class="fa fa-dollar"></i> [[${post.price}]]</p>
-                            <span class="sqmP" th:inline="text">
-                                <i class="fa fa-dollar"> [[${post.price / post.area} + '/sq.m ']]</i>
-                            </span>
                             <p class="sqm" th:text="${post.area} + ' sq.m'"></p>
                             <span class="rooms" th:text="${post.roomCount} + ' rooms'">
                             </span>
                             <ul class="adBottom">
                                 <li>
                                     <p class="name" th:inline="text">
-                                        <i class="fa fa-user"></i> [[${post.user.firstName} +' ' +
-                                        ${post.user.lastName}]]</p>
+                                        <i class="fa fa-user"></i>  [[${post.user.firstName}]] [[${post.user.lastName}]]</p>
                                 </li>
                                 <li>
                                     <p class="date" th:inline="text">
@@ -182,9 +175,6 @@
                             <i sec:authorize="isAuthenticated()" class="fa fa-star-o star" th:onclick="'addToFavorite('+${post.idPost}+')'"></i>
                             <p class="price" th:inline="text">
                                 <i class="fa fa-dollar"></i> [[${post.price}]]</p>
-                            <span class="sqmP" th:inline="text">
-                                <i class="fa fa-dollar"> [[${post.price / post.area} + '/sq.m ']]</i>
-                            </span>
                             <p class="sqm" th:text="${post.area} + ' sq.m'"></p>
                             <span class="rooms" th:text="${post.roomCount} + ' rooms'">
                             </span>
