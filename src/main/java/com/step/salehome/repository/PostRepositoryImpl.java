@@ -17,7 +17,6 @@ import java.util.List;
 @Repository
 public class PostRepositoryImpl implements PostRepository {
 
-    private final String GET_POST_BY_ID = "select * from post p inner join user u on p.id_user=u.id_user where p.id_post=?";
 
     private final String GET_POST_BY_USER_ID ="select * from post p inner join user u on p.id_user=u.id_user where u.id_user=?";
 
@@ -378,6 +377,7 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public void deletePost(int id) {
+
         jdbcTemplate.update(DELETE_POST_BY_ID, id);
     }
 

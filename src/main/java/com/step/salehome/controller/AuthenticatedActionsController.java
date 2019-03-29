@@ -65,9 +65,15 @@ public class AuthenticatedActionsController {
 
     @RequestMapping("/delete")
     public String deletePost(@RequestParam("id") int id, Model model) {
-        postService.deletePost(id);
-        model.addAttribute("message", MessageConstants.SUCCESS_DELETE);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Post post = postService.getPostById(id);
+        if(post.getUser().getIdUser() == user.getIdUser()){
+            postService.deletePost(id);
+            model.addAttribute("message", MessageConstants.SUCCESS_DELETE);
+            return "view/myPosts";
+        }
         return "view/myPosts";
+
     }
 
     @PostMapping("/add-post")
