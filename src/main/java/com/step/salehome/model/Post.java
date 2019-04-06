@@ -26,13 +26,13 @@ public class Post {
 
     @NotNull(message = "Title must not be null")
     @NotBlank(message = "Title must not be blank")
-    @Size(min = 30, max = 150, message = "Title length must be between 30 and 150")
+    @Size(min = 15, max = 150, message = "Title length must be between 30 and 150")
     private String title;
 
 
     @NotNull(message = "Description must not be null")
     @NotBlank(message = "Description must not be blank")
-    @Size(min = 100, max = 250, message = "Description length must be between 100 and 250")
+    @Size(min = 50, max = 250, message = "Description length must be between 100 and 250")
     private String desc;
 
 
