@@ -3,20 +3,20 @@
     <div class="container">
         <div class="col-md-3 push-left">
             <ul class="footerUL">
-                <li class="footerOurC"> OUR CONTACTS</li>
-                <li class="footerCountry"> USA</li>
+                <li class="footerOurC" th:text="#{lang.footer.our-contact}" style="text-transform: uppercase"> OUR CONTACTS</li>
+                <li class="footerCountry" th:text="#{lang.footer.our-country}"> Azerbaijan</li>
                 <li class="footerAdress">
-                    <i class="footerMapIcon fa fa-map-marker"></i> 27th St New York, NY 10001</li>
+                    <i class="footerMapIcon fa fa-map-marker"></i>[[#{lang.footer.address}]]</li>
                 <li class="footerNumber">
-                    <i class="footerPhoneIcon fa fa-phone"></i> +1 212-212-2121</li>
+                    <i class="footerPhoneIcon fa fa-phone"></i> +994508406478</li>
             </ul>
         </div>
         <div class="col-md-4 pull-right">
             <ul class="footerUL">
-                <li class="footerOurC">OUR NEWSLETTER</li>
+                <li class="footerOurC" th:text="#{lang.footer.our-newsletter}" >OUR NEWSLETTER</li>
                 <li class="footerInputLi">
-                    <input class="footerInput" type="text" placeholder="Your email">
-                    <button class="footerButton">SUBSCRIBE</button>
+                    <input class="footerInput" type="text" th:placeholder="#{lang.input.placeholder.your-email}">
+                    <button class="footerButton" th:text="#{lang.footer.subscribe}">SUBSCRIBE</button>
                 </li>
             </ul>
             <ul class="footerUl footerUlSocial">
@@ -43,5 +43,5 @@
             </ul>
         </div>
     </div>
-    <h5 class="footerOutro">All rights reserved 2018</h5>
+    <h5 class="footerOutro">[[#{lang.footer.all-rights}]]</h5>
 </footer>

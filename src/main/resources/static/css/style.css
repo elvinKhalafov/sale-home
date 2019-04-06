@@ -779,18 +779,19 @@ section {
 .recentlyRowIntro {
     font-size: 20px;
     font-weight: bold;
+    border-bottom: #000000 solid 2px;
 }
 
-.recentlyRowIntro::after {
-    content: "";
-    display: block;
-    width: 88.2%;
-    background-color: #282828;
-    height: 2px;
-    position: relative;
-    bottom: 11px;
-    left: 155px;
-}
+/*.recentlyRowIntro::after {*/
+    /*content: "";*/
+    /*display: block;*/
+    /*width: 88.2%;*/
+    /*background-color: #17ee15;*/
+    /*height: 2px;*/
+    /*position: relative;*/
+    /*bottom: 11px;*/
+    /*left: 155px;*/
+/*}*/
 
 /* recently */
 
@@ -1018,6 +1019,9 @@ footer {
     position: relative;
     width: 15%;
     margin: 0 auto;
+    border-bottom: 3px solid #5d88d5;
+    bottom: 22px;
+    width: 100%;
 }
 
 .footerOutro::before {
@@ -1029,14 +1033,14 @@ footer {
     margin-left: 15px;
 }
 
-.footerOutro::before,
-.footerOutro::after {
-    content: "";
-    position: absolute;
-    height: 5px;
-    border-bottom: 3px solid #5d88d5;
-    bottom: 22px;
-    width: 515px;
-}
+/*.footerOutro::before,*/
+/*.footerOutro::after {*/
+    /*content: "";*/
+    /*position: absolute;*/
+    /*height: 5px;*/
+    /*border-bottom: 3px solid #5d88d5;*/
+    /*bottom: 22px;*/
+    /*width: 515px;*/
+/*}*/
 
 /* FOOTER */

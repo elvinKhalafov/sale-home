@@ -1,18 +1,25 @@
 package com.step.salehome.controller;
 
 
+import com.step.salehome.config.CaptchaSettings;
+import com.step.salehome.constants.MessageConstants;
 import com.step.salehome.model.Post;
 import com.step.salehome.service.PostService;
+import com.step.salehome.util.EmailUtil;
+import com.step.salehome.util.ReCaptchaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
+import java.net.URI;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 @Controller
 public class PostController {
@@ -21,17 +28,55 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private RestOperations restTemplate;
 
+    @Autowired
+    private CaptchaSettings captchaSettings;
 
-    @RequestMapping("/post/{id}")
-    public String getPostByid(Model model, @PathParam("id") int id){
+    @Autowired
+    private EmailUtil emailUtil;
+
+    @RequestMapping("/send-email/{id}")
+    public String sendEmail(@PathVariable("id") int id,
+                            @RequestParam("email") String email,
+                            @RequestParam("phone") String phone,
+                            @RequestParam("message") String message,
+                            @RequestParam(name="g-recaptcha-response") String reCaptchaResponse,
+                            RedirectAttributes redirectAttributes,
+                            HttpServletRequest httpServletRequest) {
+
         Post post = postService.getPostById(id);
-        model.addAttribute("post", post);
 
-        return "view/pre";
+        URI verifyUri = URI.create( captchaSettings.getUrl() +
+                "?secret="+captchaSettings.getSecret()+
+                "&response="+reCaptchaResponse+
+                "&remoteip="+httpServletRequest.getRemoteAddr());
+
+        ReCaptchaResponse response = restTemplate.getForObject(verifyUri, ReCaptchaResponse.class);
+        try {
+            if (!response.isSuccess()) {
+                redirectAttributes.addFlashAttribute("message", MessageConstants.ERROR_RECAPTCHA);
+                return "redirect:"+httpServletRequest.getHeader("Referer");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(response.isSuccess());
+
+        if (post.isEmailAllowed() && (email != null && !email.trim().isEmpty()) && (phone != null && !phone.trim().isEmpty()) && message != null) {
+
+            String subject = "Someone is interested in about your post";
+            String emailMessage = message+"\n \n \n" +phone+"\n\n\n"+email;
+            Executors
+                    .newSingleThreadExecutor()
+                    .submit(() -> emailUtil.sendMessageToPostOwner(post.getUser().getEmail(), subject, emailMessage));
+            redirectAttributes.addFlashAttribute("message", MessageConstants.SUCCES_SENDING_EMAIL);
+            return "redirect:/";
+        }else {
+            redirectAttributes.addFlashAttribute("message", MessageConstants.ERROR_SENDING_EMAIL);
+            return "redirect:/post/"+id;
+        }
     }
-
-
-
-
 }

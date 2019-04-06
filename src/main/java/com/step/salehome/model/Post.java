@@ -59,6 +59,7 @@ public class Post {
     private String phoneNumber;
 
 
+
     private LocalDateTime shareDate;
     private String status;
 

@@ -1,6 +1,7 @@
 package com.step.salehome.repository;
 
 import com.step.salehome.model.City;
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class PostRepositoryTest {
 
+
+
     @Autowired
     private PostRepository postRepository;
 
@@ -24,7 +27,17 @@ public class PostRepositoryTest {
         System.out.println(cities);
     }
 
+    @Test
+    public void getPostById(){
+        System.out.println(postRepository.getPostById(5));
+    }
+
     public void deletePost() {
         postRepository.deletePost(2);
     }
+
+    public void setDataToDataBase(){
+
+    }
+
 }

@@ -19,6 +19,7 @@ public class BeansConfig {
         } else {
             return imagePathMac;
         }
-
     }
+
+
 }

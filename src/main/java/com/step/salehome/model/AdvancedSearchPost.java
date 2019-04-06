@@ -28,6 +28,7 @@ public class AdvancedSearchPost {
 
     private String miniArea;
 
+
     public String getIdCity() {
         return idCity;
     }
@@ -156,10 +157,11 @@ public class AdvancedSearchPost {
     public boolean isAllFieldsNull() {
         boolean condition = true;
         List<Object> postLists = Arrays.asList(idCity, address, keywords, postType, roomCount, maxPrice, miniPrice, homeType, maxArea, miniArea);
-       condition = !postLists.stream().anyMatch(o -> o!=null );
+        condition = !postLists.stream().anyMatch(o -> o!=null );
 
         return condition;
     }
+
 
 
 }

@@ -29,12 +29,21 @@ public class UserRepositoryTest {
     public void loginUser() throws Exception {
         User user = userRepository.loginUser("v.nesirov91@gmail.com");
         System.out.println(user);
+        System.out.println(user.getIdFavoritePost().contains(10));
     }
 
     @Test
     public void getFavoritePosts() throws Exception {
-        List<Integer> i = Arrays.asList(4, 5, 7);
-        System.out.println(i.get(1));
+        List<String> i = Arrays.asList("salam", "sagol", "necesen");
+        System.out.println(i.stream().noneMatch(integer -> integer.endsWith("l")));
+    }
+
+
+    @Test
+    public void mathTest(){
+        int value = 121;
+
+        System.out.println( (int) Math.ceil( (double) value /20));
     }
 
 }

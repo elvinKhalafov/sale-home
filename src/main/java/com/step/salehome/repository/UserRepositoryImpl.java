@@ -25,7 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
     private final String INSERT_NEW_USER_SQL = "insert into user(email, password, first_name, last_name, token, id_role, status) " +
             "values (?, ?, ?, ?, ?, ?, ?)";
 
-    private final String GET_USER_BY_EMAIL = "select * from user u inner join role r on u.id_role = r.id_role left join favorite_post fp on u.id_user = fp.id_user where u.email = ?";
+    private final String GET_USER_BY_EMAIL = "select * from user u inner join role r on u.id_role = r.id_role left join favorite_post fp on u.id_user = fp.id_user where u.email = ? and u.status = 1";
 
     private final String UPDATE_USER_STATUS_BY_TOKEN = "update user set token = ?, status = ? where token = ?";
 
@@ -73,7 +73,7 @@ public class UserRepositoryImpl implements UserRepository {
                     role.setRoleType(rs.getString("role_type"));
                     user.setRole(role);
                     do {
-                        user.addIdFavoritePost(rs.getLong("id_post"));
+                        user.addIdFavoritePost(rs.getInt("id_post"));
                     } while (rs.next());
                     return user;
                 }

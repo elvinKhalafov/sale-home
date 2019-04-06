@@ -2,6 +2,7 @@ package com.step.salehome.controller;
 
 
 import com.step.salehome.constants.PostConstants;
+import com.step.salehome.model.City;
 import com.step.salehome.model.Post;
 import com.step.salehome.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class HomeController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private List<City> cityList;
+
     @RequestMapping("/")
     public String index(Model model) {
         List<Post> postList = postService.getRecentlyPost();
@@ -31,6 +35,10 @@ public class HomeController {
 
         List<Post> randomRentPost = randomPostList.stream().filter(post -> post.getPostType().equals(PostConstants.POST_TYPE_RENT)).limit(7).collect(Collectors.toList());
         model.addAttribute("randomRentPost", randomRentPost);
+
+        model.addAttribute("cities", cityList);
+
+        model.addAttribute("postCount", postService.getPostCount());
 
         return "view/home";
     }

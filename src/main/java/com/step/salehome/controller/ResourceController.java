@@ -23,12 +23,9 @@ public class ResourceController {
     @ResponseBody
     public byte[] getImageFromFileSystem(@PathVariable("image-path" )String postImage) throws IOException {
 
-        System.out.println("Path: "+imagePath);
-
         postImage = new String(DatatypeConverter.parseBase64Binary(postImage));
         Path img = Paths.get(imagePath, postImage);
         return Files.readAllBytes(img);
-
     }
 
 }

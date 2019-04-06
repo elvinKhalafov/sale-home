@@ -22,7 +22,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers("/user/**").authenticated()
                 .antMatchers("/**").permitAll()
         .and()
-        .formLogin().loginPage("/login").successForwardUrl("/").failureForwardUrl("/login").usernameParameter("email").passwordParameter("password")
+        .formLogin().defaultSuccessUrl("/").loginPage("/login").failureForwardUrl("/login").usernameParameter("email").passwordParameter("password")
         .and()
         .logout().logoutUrl("/logout").logoutSuccessUrl("/");
     }

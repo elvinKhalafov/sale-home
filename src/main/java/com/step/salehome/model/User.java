@@ -38,14 +38,15 @@ public class User implements UserDetails{
     private String token;
     private Role role;
     private int status;
-    private List<Long> idFavoritePost;
+    private List<Integer> idFavoritePost;
+
 
 
     public User() {
         idFavoritePost = new ArrayList<>();
     }
 
-    public void addIdFavoritePost(long idFavoritePost) {
+    public void addIdFavoritePost(Integer idFavoritePost) {
         this.idFavoritePost.add(idFavoritePost);
     }
 

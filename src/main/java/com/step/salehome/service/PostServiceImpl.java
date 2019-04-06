@@ -22,8 +22,8 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public List<Post> searchPost(AdvancedSearchPost advancedSearchPost) {
-        return postRepository.searchPost(advancedSearchPost);
+    public List<Post> searchPost(AdvancedSearchPost advancedSearchPost, int offset) {
+        return postRepository.searchPost(advancedSearchPost, offset);
     }
 
     @Override
@@ -42,13 +42,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getmyPosts(int id) {
-        return postRepository.getmyPosts(id);
+    public List<Post> getMyPosts(int id, int offset) {
+        return postRepository.getMyPosts(id, offset);
     }
 
     @Override
     public List<Post> getFavoritePosts(int id) {
         return postRepository.getFavoritePosts(id);
+    }
+
+    @Override
+    public void deleteFromFavoritePost(int userId, int postId) {
+        postRepository.deleteFromFavoritePost(userId, postId);
     }
 
     @Override
@@ -67,12 +72,20 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getMyFavoritePosts(int id) {
-        return postRepository.getMyFavoritePosts(id);
+    public List<Post> getRandomPost() {
+        return postRepository.getRandomPost();
     }
 
     @Override
-    public List<Post> getRandomPost() {
-        return postRepository.getRandomPost();
+    public int getPostCount(){ return postRepository.getPostCount();}
+
+    @Override
+    public int getSearchedPostCount(AdvancedSearchPost advancedSearchPost) {
+        return postRepository.getSearchedPostCount(advancedSearchPost);
+    }
+
+    @Override
+    public int getMyPostCount(int id) {
+        return postRepository.getMyPostCount(id);
     }
 }
